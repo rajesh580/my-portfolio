@@ -1,9 +1,9 @@
 import React from "react";
 import { FaLinkedin, FaInstagram, FaEnvelope, FaGithub } from "react-icons/fa";
 
-function About() {
+function Contact() {
   return (
-    <section id="about" className="bg-gray-100 py-20">
+    <section id="footer" className="bg-gray-100 py-20">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl font-bold mb-4">Contact Me</h2>
         <div className="flex justify-center space-x-6">
@@ -47,4 +47,4 @@ function About() {
   );
 }
 
-export default About;
+export default Contact;
