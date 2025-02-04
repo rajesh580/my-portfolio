@@ -1,4 +1,4 @@
-#cheack the work
+# check the work
 
 https://rajesh580.github.io/my-portfolio/
 
