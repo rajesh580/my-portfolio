@@ -10,9 +10,15 @@ function Projects() {
     },
     {
       title: "Project 2: Face Recognition",
-      description: "My personal portfolio website showcasing my skills and projects.",
+      description: "A face recognition system using python Open-cv",
       githubLink: "https://github.com/rajesh580/face_recognition",
       liveDemo: "#", // Replace this with the live demo link if available
+    },
+    {
+      title: "Project 3: My-Portfolio",
+      description: "My personal portfolio website showcasing my skills and projects.",
+      githubLink: "https://github.com/rajesh580/face_recognition",
+      liveDemo: "https://rajesh580.github.io/my-portfolio/", // Replace this with the live demo link if available
     },
   ];
 
