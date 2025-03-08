@@ -11,7 +11,7 @@ function About() {
           {/* Profile Image */}
           <div className="lg:w-1/3 mb-8 lg:mb-0">
             <img
-              src="profile.jpg"
+              src="https://github.com/rajesh580/my-portfolio/blob/main/src/components/profile.jpg"
               alt="Rajesh Rajoli"
               className="rounded-full shadow-lg w-64 mx-auto lg:w-full"
             />
