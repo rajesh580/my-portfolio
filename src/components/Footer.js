@@ -9,7 +9,7 @@ function Contact() {
         <div className="flex justify-center space-x-6">
           {/* LinkedIn */}
           <a
-            href="https://www.linkedin.com/in/rajesh-rajoli-9438a3271?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            href="https://www.linkedin.com/in/rajesh-rajoli"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-800 text-2xl"
