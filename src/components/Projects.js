@@ -20,6 +20,12 @@ function Projects() {
       githubLink: "https://github.com/rajesh580/face_recognition",
       liveDemo: "https://rajesh580.github.io/my-portfolio/", // Replace this with the live demo link if available
     },
+    {
+      title: "Project 4: E-commerce platform",
+      description: "An e-commerce platform for selling and buying anything",
+      githubLink: "https://github.com/rajesh580/E-commerce",
+      liveDemo: "#", // Replace this with the live demo link if available
+    },
   ];
 
   return (
