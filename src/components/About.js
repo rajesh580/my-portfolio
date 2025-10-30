@@ -7,27 +7,24 @@ function About() {
         <h2 className="text-4xl font-bold text-center text-gray-800 mb-10">
           About Me
         </h2>
-        <div className="flex flex-col lg:flex-row items-center">
-          {/* Profile Image */}
-          <div className="lg:w-1/3 mb-8 lg:mb-0">
-            <img
-              src="https://raw.githubusercontent.com/rajesh580/my-portfolio/c1f39a68e732b21e6ee924675edf744a418c34b1/src/components/profile.jpg"
-              alt="Rajesh Rajoli"
-              className="rounded-full shadow-lg w-64 mx-auto lg:w-full"
-            />
-          </div>
 
-          {/* About Text */}
-          <div className="lg:w-2/3 lg:pl-10 text-center lg:text-left">
-            <p className="text-lg text-gray-700 mb-6">
-              Hi, I'm <strong className="text-blue-600">Rajesh Rajoli</strong>, a software developer with a passion for building innovative and efficient web applications. My expertise lies in full-stack development, and I love solving real-world problems through technology.
-            </p>
-            <p className="text-lg text-gray-700 mb-6">
-              With a strong commitment to continuous learning, I always look for opportunities to improve my skills and take on challenging projects that push me to grow. I thrive on collaboration and creating impactful solutions.
-            </p>
-            <p className="text-lg text-gray-700 mb-6">
-              In my free time, I enjoy exploring new technologies, contributing to open-source projects, and staying updated with the latest industry trends.
-            </p>
+        {/* Text-only layout (profile picture removed) */}
+        <div className="card max-w-3xl mx-auto text-center p-8">
+          <p className="text-lg text-gray-700 mb-6">
+            Hi, I'm <strong className="text-indigo-600">Rajesh Rajoli</strong>, a software developer passionate about building innovative and efficient web applications. My expertise is full-stack development and I enjoy solving real-world problems through code.
+          </p>
+          <p className="text-lg text-gray-700 mb-6">
+            I'm committed to continuous learning, collaboration, and creating impactful solutions. I contribute to open-source projects and keep up with the latest tech trends.
+          </p>
+
+          <div className="mt-4">
+            <div className="text-sm text-gray-600 mb-2">Core skills</div>
+            <div className="flex flex-wrap justify-center gap-2">
+              <span className="px-3 py-1 rounded-full bg-indigo-100 text-indigo-700">React</span>
+              <span className="px-3 py-1 rounded-full bg-sky-100 text-sky-700">Node.js</span>
+              <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-700">JavaScript</span>
+              <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700">MongoDB</span>
+            </div>
           </div>
         </div>
       </div>

@@ -1,3 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom small animation helper used by Home component */
+@layer utilities {
+	.animate-fadeIn {
+		animation: fadeIn 0.4s forwards;
+	}
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; transform: translateY(6px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+/* Smooth scrolling and accessibility helpers */
+html { scroll-behavior: smooth; }
+
+.skip-link {
+	position: absolute;
+	left: -9999px;
+	top: auto;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+.skip-link:focus {
+	left: 1rem;
+	top: 1rem;
+	width: auto;
+	height: auto;
+	padding: 0.5rem 1rem;
+	background: rgba(0,0,0,0.8);
+	color: white;
+	border-radius: 6px;
+	z-index: 50;
+}
+
+/* Background wrapper to hold decorative blobs */
+.bg-decor { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.content { position: relative; z-index: 10; }
+
+/* small helper for fade animations */
+.fade-in-slow { animation: fadeIn 0.9s ease both; }

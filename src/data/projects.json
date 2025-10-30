@@ -1,0 +1,68 @@
+[
+  {
+    "id": 981434494,
+    "title": "E-commerce",
+    "description": "this is a e commerce website with admin panel, which have maximum features without any databases",
+    "githubLink": "https://github.com/rajesh580/E-commerce",
+    "liveDemo": "",
+    "tags": ["JavaScript","web"],
+    "tech": ["JavaScript"],
+    "year": 2025,
+    "featured": true
+  },
+  {
+    "id": 902330152,
+    "title": "face_recognition",
+    "description": "Face recognition repository (Python/OpenCV)",
+    "githubLink": "https://github.com/rajesh580/face_recognition",
+    "liveDemo": "",
+    "tags": ["Python","computer-vision"],
+    "tech": ["Python","OpenCV"],
+    "year": 2024,
+    "featured": false
+  },
+  {
+    "id": 890227533,
+    "title": "flask_chatApp",
+    "description": "Real-time chat app built with Flask",
+    "githubLink": "https://github.com/rajesh580/flask_chatApp",
+    "liveDemo": "",
+    "tags": ["Flask","realtime"],
+    "tech": ["Flask","Socket.IO"],
+    "year": 2024,
+    "featured": false
+  },
+  {
+    "id": 927270418,
+    "title": "media-transcriber",
+    "description": "Media transcriber tools and examples",
+    "githubLink": "https://github.com/rajesh580/media-transcriber",
+    "liveDemo": "",
+    "tags": ["Python","audio"],
+    "tech": ["Python"],
+    "year": 2025,
+    "featured": false
+  },
+  {
+    "id": 924226924,
+    "title": "my-portfolio",
+    "description": "My-portfolio is a personal portfolio website designed to showcase my skills, projects, achievements, and professional journey.",
+    "githubLink": "https://github.com/rajesh580/my-portfolio",
+    "liveDemo": "https://rajesh580.github.io/my-portfolio/",
+    "tags": ["React","web"],
+    "tech": ["React","Tailwind"],
+    "year": 2025,
+    "featured": true
+  },
+  {
+    "id": 1078063818,
+    "title": "plant-disease-detection",
+    "description": "Plant disease detection project",
+    "githubLink": "https://github.com/rajesh580/plant-disease-detection",
+    "liveDemo": "",
+    "tags": ["computer-vision","web"],
+    "tech": ["JavaScript"],
+    "year": 2025,
+    "featured": false
+  }
+]

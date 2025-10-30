@@ -1,41 +1,22 @@
 import React from "react";
 
 function Home() {
+  const text = "Showcasing my work and skills to the world.";
   return (
-    <section id="home" className="bg-gray-100 py-20">
-      <div className="container mx-auto text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to My Portfolio</h1>
-        <p className="text-2xl font-bold text-gray-800 mb-4">I'm Rajesh Rajoli</p>
-        <p className="text-lg text-gray-700">
-  {"Showcasing my work and skills to the world.".split(", ").map((word, index) => (
-    <span
-      key={index}
-      style={{
-        display: "inline-block",
-        opacity: 0,
-        animation: `fadeIn 1s forwards`,
-        animationDelay: `${index * 1}s`,
-      }}
-    >
-      {word}
-      {index < 7 && " " /* Add a space after each word except the last one */}
-    </span>
-  ))}
-</p>
-
-<style>
-  {`
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-  `}
-</style>
-
+    <section id="home" className="py-24">
+      <div className="container mx-auto px-4">
+        <div className="card p-10 text-center">
+          <h1 className="text-5xl font-extrabold mb-4" style={{ background: 'linear-gradient(90deg,#7c3aed,#06b6d4)', WebkitBackgroundClip: 'text', color: 'transparent' }}>
+            Welcome to My Portfolio
+          </h1>
+          <p className="text-2xl font-semibold text-gray-800 mb-6">I'm Rajesh Rajoli</p>
+          <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-6">
+            {text}
+          </p>
+          <div className="flex justify-center space-x-4">
+            <a href="#footer" className="px-4 py-2 rounded-md border border-gray-200">Get in touch</a>
+          </div>
+        </div>
       </div>
     </section>
   );
