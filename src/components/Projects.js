@@ -1,69 +1,106 @@
-import React from "react";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+// FIX: Import the project data
+import projects from '../data/projects.json'; 
+import ProjectModal from './ProjectModal';
+import { useTheme } from '../context/ThemeContext'; // Import theme hook
 
 function Projects() {
-  const projects = [
-    {
-      title: "Project 1: Chat Application",
-      description: "A real-time chat application with user authentication and file sharing features.",
-      githubLink: "https://github.com/rajesh580/flask_chatApp",
-      liveDemo: "#", // Replace this with the live demo link if available
-    },
-    {
-      title: "Project 2: Face Recognition",
-      description: "A face recognition system using python Open-cv",
-      githubLink: "https://github.com/rajesh580/face_recognition",
-      liveDemo: "#", // Replace this with the live demo link if available
-    },
-    {
-      title: "Project 3: My-Portfolio",
-      description: "My personal portfolio website showcasing my skills and projects.",
-      githubLink: "https://github.com/rajesh580/face_recognition",
-      liveDemo: "https://rajesh580.github.io/my-portfolio/", // Replace this with the live demo link if available
-    },
-    {
-      title: "Project 4: E-commerce platform",
-      description: "An e-commerce platform for selling and buying anything",
-      githubLink: "https://github.com/rajesh580/E-commerce",
-      liveDemo: "#", // Replace this with the live demo link if available
-    },
-  ];
+  const { theme } = useTheme(); // Get theme
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   return (
-    <section id="projects" className="bg-white py-20">
-      <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-8">My Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    // Use theme-aware colors: bg-surface
+    <section id="projects" className="bg-surface py-20 md:py-28">
+      <div className="container mx-auto px-6 lg:px-20">
+        {/* Use theme-aware colors: text-text */}
+        <h2 className={`text-4xl font-display font-bold text-center text-text mb-16 ${theme === 'neon' ? 'text-glow' : ''}`}>
+          My Projects
+        </h2>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ staggerChildren: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+        >
+          {/* FIX: Map over projects from JSON */}
           {projects.map((project, index) => (
-            <div
+            <motion.div
               key={index}
-              className="p-6 bg-white shadow-lg rounded-lg hover:shadow-2xl transition-shadow duration-300"
+              variants={cardVariants}
+              // Use theme-aware colors: bg-background
+              className="bg-background shadow-lg rounded-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
             >
-              <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-              <p className="text-gray-700 mb-4">{project.description}</p>
-              <div className="flex justify-center space-x-4">
-                <a
-                  href={project.githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
-                >
-                  GitHub Repository
-                </a>
-                {project.liveDemo && project.liveDemo !== "#" && (
+              <img
+                src={project.imageUrl}
+                alt={project.title}
+                className="w-full h-48 object-cover cursor-pointer"
+                onClick={() => setSelectedProject(project)}
+                onError={(e) => { e.target.src = 'https://placehold.co/600x400/1F2937/9CA3AF?text=Project+Image'; }}
+              />
+              <div className="p-6 flex flex-col flex-grow">
+                {/* Use theme-aware colors: text-text */}
+                <h3 className="text-xl font-bold font-display text-text mb-2">
+                  {project.title}
+                </h3>
+                {/* Use theme-aware colors: text-text-muted */}
+                <p className="text-text-muted mb-4 flex-grow">
+                  {project.description}
+                </p>
+
+                {/* Tags - Use theme-aware colors: bg-primary/10 text-primary */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Links - Use theme-aware colors: text-text-muted hover:text-primary */}
+                <div className="flex justify-start space-x-6 mt-auto">
                   <a
-                    href={project.liveDemo}
+                    href={project.githubLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-green-600 hover:underline"
+                    className="text-text-muted hover:text-primary transition duration-200 flex items-center text-lg"
+                    aria-label={`${project.title} GitHub Repository`}
                   >
-                    Live Demo
+                    <FaGithub className="mr-2" /> GitHub
                   </a>
-                )}
+                  {project.liveDemo && project.liveDemo !== '#' && (
+                    <a
+                      href={project.liveDemo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-text-muted hover:text-primary transition duration-200 flex items-center text-lg"
+                      aria-label={`${project.title} Live Demo`}
+                    >
+                      <FaExternalLinkAlt className="mr-2" /> Live Demo
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
+
+      {/* Project Modal */}
+      <ProjectModal 
+        project={selectedProject} 
+        onClose={() => setSelectedProject(null)} 
+      />
     </section>
   );
 }
