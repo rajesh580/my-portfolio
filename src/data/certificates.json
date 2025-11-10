@@ -18,7 +18,7 @@
   {
     "id": 3,
     "title": "C Programming Course",
-    "issuer": "Infosys",
+    "issuer": "Infosys Springboard",
     "description": null,
     "imageUrl": "https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/src/components/Screenshot%202025-11-10%20123617.png",
     "credentialUrl": "#"
@@ -50,7 +50,7 @@
   {
     "id": 7,
     "title": "Introduction to Prompt Engineering for Generative AI",
-    "issuer": "Unknown",
+    "issuer": "Linkidin Learning",
     "description": null,
     "imageUrl": "https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/src/components/Screenshot%202025-11-10%20123631.png",
     "credentialUrl": "#"
@@ -58,7 +58,7 @@
   {
     "id": 8,
     "title": "Python Programming",
-    "issuer": "Unknown",
+    "issuer": "Infosys Springboard",
     "description": null,
     "imageUrl": "https://github.com/rajesh580/my-portfolio/blob/main/src/components/Screenshot%202025-11-10%20123716.png?raw=true",
     "credentialUrl": "#"
@@ -66,15 +66,15 @@
   {
     "id": 9,
     "title": "AI TOOLS Workshop",
-    "issuer": "Unknown",
+    "issuer": "TSIAR",
     "description": null,
     "imageUrl": "https://github.com/rajesh580/my-portfolio/blob/main/src/components/Screenshot%202025-11-10%20123755.png?raw=true",
     "credentialUrl": "#"
   },
   {
-    "id": 9,
+    "id": 10,
     "title": "Cyber Security Workshop",
-    "issuer": "Unknown",
+    "issuer": "TSIAR",
     "description": null,
     "imageUrl": "https://github.com/rajesh580/my-portfolio/blob/main/src/components/Screenshot%202025-11-10%20123821.png?raw=true",
     "credentialUrl": "#"

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 // FIX: Removed unused 'FaImage' import, added 'FaExternalLinkAlt'
-import { FaFileCode, FaTimes, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaFileCode, FaTimes } from 'react-icons/fa';
 import certificates from '../data/certificates.json';
 import { useTheme } from '../context/ThemeContext'; // Import theme hook
 
@@ -103,17 +103,6 @@ function Certificates() {
                     <p className="text-text-muted text-base mb-6">
                       {selectedCert.description}
                     </p>
-                    
-                    <a
-                      href={selectedCert.credentialUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      // Use theme-aware colors: bg-primary, hover:bg-primary-accent
-                      className="inline-flex items-center bg-primary text-white font-medium py-3 px-6 rounded-lg shadow-lg hover:bg-primary-accent transition duration-300 mb-10 transform hover:scale-105"
-                    >
-                      Verify Credential
-                      <FaExternalLinkAlt className="ml-2" />
-                    </a>
 
                     {/* Certificate Image */}
                     <div>
