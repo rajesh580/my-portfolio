@@ -1,85 +1,106 @@
-import React, { useEffect, useState } from 'react';
-import projectsData from '../data/projects.json';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+// FIX: Import the project data
+import projects from '../data/projects.json'; 
 import ProjectModal from './ProjectModal';
+import { useTheme } from '../context/ThemeContext'; // Import theme hook
 
 function Projects() {
-  const [projects, setProjects] = useState([]);
-  const [selected, setSelected] = useState(null);
+  const { theme } = useTheme(); // Get theme
+  const [selectedProject, setSelectedProject] = useState(null);
 
-  useEffect(() => {
-    // prefer featured projects first
-    const list = (projectsData || []).slice().sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
-    setProjects(list);
-  }, []);
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   return (
-    <section id="projects" className="py-20">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">Projects</h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((p) => (
-            <article
-              key={p.id}
-              className="card project-card p-4 hover:shadow-xl cursor-pointer transition-transform transform hover:-translate-y-1"
-              onClick={() => setSelected(p)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  setSelected(p);
-                }
-              }}
-              role="button"
-              tabIndex={0}
+    // Use theme-aware colors: bg-surface
+    <section id="projects" className="bg-surface py-20 md:py-28">
+      <div className="container mx-auto px-6 lg:px-20">
+        {/* Use theme-aware colors: text-text */}
+        <h2 className={`text-4xl font-display font-bold text-center text-text mb-16 ${theme === 'neon' ? 'text-glow' : ''}`}>
+          My Projects
+        </h2>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ staggerChildren: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+        >
+          {/* FIX: Map over projects from JSON */}
+          {projects.map((project, index) => (
+            <motion.div
+              key={index}
+              variants={cardVariants}
+              // Use theme-aware colors: bg-background
+              className="bg-background shadow-lg rounded-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
             >
-              <div className="card-body flex flex-col h-full">
-                <div className="flex items-start justify-between">
-                  <h3 className="project-title text-lg font-bold">{p.title}</h3>
-                  {p.featured && <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Featured</span>}
+              <img
+                src={project.imageUrl}
+                alt={project.title}
+                className="w-full h-48 object-cover cursor-pointer"
+                onClick={() => setSelectedProject(project)}
+                onError={(e) => { e.target.src = 'https://placehold.co/600x400/1F2937/9CA3AF?text=Project+Image'; }}
+              />
+              <div className="p-6 flex flex-col flex-grow">
+                {/* Use theme-aware colors: text-text */}
+                <h3 className="text-xl font-bold font-display text-text mb-2">
+                  {project.title}
+                </h3>
+                {/* Use theme-aware colors: text-text-muted */}
+                <p className="text-text-muted mb-4 flex-grow">
+                  {project.description}
+                </p>
+
+                {/* Tags - Use theme-aware colors: bg-primary/10 text-primary */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
 
-                <p className="text-gray-700 mt-3 flex-1">{p.description}</p>
-
-                <div className="mt-4 flex items-center justify-between">
-                  <div className="flex gap-2 flex-wrap">
-                    {(p.tech || []).slice(0, 4).map((t, i) => (
-                      <span key={i} className="px-2 py-1 text-xs bg-gray-100 rounded">{t}</span>
-                    ))}
-                  </div>
-
-                  <div className="flex gap-2">
-                    {p.liveDemo && p.liveDemo !== '#' && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          window.open(p.liveDemo, '_blank');
-                        }}
-                        className="px-3 py-1 rounded-md border text-sm"
-                        type="button"
-                      >
-                        Live
-                      </button>
-                    )}
-
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (p.githubLink) window.open(p.githubLink, '_blank');
-                      }}
-                      className="btn-accent text-sm"
-                      type="button"
+                {/* Links - Use theme-aware colors: text-text-muted hover:text-primary */}
+                <div className="flex justify-start space-x-6 mt-auto">
+                  <a
+                    href={project.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-text-muted hover:text-primary transition duration-200 flex items-center text-lg"
+                    aria-label={`${project.title} GitHub Repository`}
+                  >
+                    <FaGithub className="mr-2" /> GitHub
+                  </a>
+                  {project.liveDemo && project.liveDemo !== '#' && (
+                    <a
+                      href={project.liveDemo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-text-muted hover:text-primary transition duration-200 flex items-center text-lg"
+                      aria-label={`${project.title} Live Demo`}
                     >
-                      Source
-                    </button>
-                  </div>
+                      <FaExternalLinkAlt className="mr-2" /> Live Demo
+                    </a>
+                  )}
                 </div>
               </div>
-            </article>
+            </motion.div>
           ))}
-        </div>
-
-        <ProjectModal project={selected} onClose={() => setSelected(null)} />
+        </motion.div>
       </div>
+
+      {/* Project Modal */}
+      <ProjectModal 
+        project={selectedProject} 
+        onClose={() => setSelectedProject(null)} 
+      />
     </section>
   );
 }

@@ -2,44 +2,102 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom small animation helper used by Home component */
+/* 2. Define CSS Variables for ALL your themes */
+:root, .neon {
+  /* Neon Theme */
+  --color-primary: 317 100% 50%; /* HSL for Neon Pink/Magenta */
+  --color-primary-accent: 317 100% 45%; /* HSL for Darker Pink */
+
+  --color-text: 240 5% 96%;    /* HSL for Neutral-50 (Light Gray) */
+  --color-text-muted: 240 4% 65%;   /* HSL for Neutral-400 */
+  
+  --color-background: 228 8% 12%;    /* HSL for Neutral-950 (Very Dark Blue/Gray) */
+  --color-surface: 228 8% 17%;    /* HSL for Neutral-900 (Dark Gray) */
+  
+  --shadow-color: 317 100% 50%; /* Neon Pink shadow */
+  --glow-opacity: 0.7; /* Enable glow */
+}
+
+.light {
+  /* Light Theme (Default) */
+  --color-primary: 217 91% 60%; /* HSL for Blue-500 */
+  --color-primary-accent: 221 83% 53%; /* HSL for Blue-600 */
+  
+  --color-text: 228 8% 17%;    /* HSL for Neutral-900 (Dark Gray) */
+  --color-text-muted: 228 8% 40%;   /* HSL for Neutral-700 (Medium Gray) */
+  
+  --color-background: 0 0% 100%;       /* HSL for White */
+  --color-surface: 240 5% 96%;    /* HSL for Neutral-50 (Light Gray) */
+  
+  --shadow-color: 228 8% 70%; 
+  --glow-opacity: 0; /* No glow on light theme */
+}
+
+
+.dark {
+  /* NEW: Professional Dark Theme */
+  --color-primary: 217 91% 60%; /* HSL for Blue-500 */
+  --color-primary-accent: 221 83% 53%; /* HSL for Blue-600 */
+
+  --color-text: 240 5% 96%;    /* HSL for Neutral-50 (Light Gray) */
+  --color-text-muted: 240 4% 65%;   /* HSL for Neutral-400 */
+  
+  --color-background: 228 8% 12%;    /* HSL for Neutral-950 (Very Dark Blue/Gray) */
+  --color-surface: 228 8% 17%;    /* HSL for Neutral-900 (Dark Gray) */
+  
+  --shadow-color: 217 91% 60%; 
+  --glow-opacity: 0;
+}
+
+.forest {
+  /* NEW: Forest Theme */
+  --color-primary: 158 79% 43%; /* HSL for Green-600 */
+  --color-primary-accent: 158 79% 38%; /* HSL for Green-700 */
+
+  --color-text: 120 10% 95%;   /* HSL for Lightest Green/Gray */
+  --color-text-muted: 120 5% 70%;   /* HSL for Medium Green/Gray */
+  
+  --color-background: 120 10% 10%;   /* HSL for Darkest Green/Gray */
+  --color-surface: 120 10% 15%;   /* HSL for Dark Green/Gray */
+  
+  --shadow-color: 158 79% 43%; 
+  --glow-opacity: 0;
+}
+
+.synthwave {
+  /* NEW: Synthwave Theme */
+  --color-primary: 279 85% 61%; /* HSL for Purple-600 */
+  --color-primary-accent: 185 94% 51%; /* HSL for Cyan-500 */
+
+  --color-text: 265 40% 95%;   /* HSL for Lightest Purple/Gray */
+  --color-text-muted: 265 20% 70%;   /* HSL for Medium Purple/Gray */
+  
+  --color-background: 265 39% 12%;   /* HSL for Darkest Indigo */
+  --color-surface: 265 39% 22%;   /* HSL for Dark Indigo */
+  
+  --shadow-color: 185 94% 51%; 
+  --glow-opacity: 0.5; /* Enable glow */
+}
+
+
+/* 3. Apply base styles directly using CSS variables */
+body {
+  background-color: hsl(var(--color-background));
+  color: hsl(var(--color-text));
+  transition-property: color, background-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* 4. Define Custom Utility Classes */
 @layer utilities {
-	.animate-fadeIn {
-		animation: fadeIn 0.4s forwards;
-	}
+  .text-glow {
+    /* Apply glow based on variable, 'neon' and 'synthwave' will glow */
+    text-shadow: 0 0 8px hsl(var(--color-primary) / var(--glow-opacity, 0));
+  }
+
+  .shadow-glow-lg {
+    /* Apply glow based on variable, 'neon' and 'synthwave' will glow */
+    box-shadow: 0 0 25px -5px hsl(var(--shadow-color) / var(--glow-opacity, 0));
+  }
 }
-
-@keyframes fadeIn {
-	from { opacity: 0; transform: translateY(6px); }
-	to { opacity: 1; transform: translateY(0); }
-}
-
-/* Smooth scrolling and accessibility helpers */
-html { scroll-behavior: smooth; }
-
-.skip-link {
-	position: absolute;
-	left: -9999px;
-	top: auto;
-	width: 1px;
-	height: 1px;
-	overflow: hidden;
-}
-.skip-link:focus {
-	left: 1rem;
-	top: 1rem;
-	width: auto;
-	height: auto;
-	padding: 0.5rem 1rem;
-	background: rgba(0,0,0,0.8);
-	color: white;
-	border-radius: 6px;
-	z-index: 50;
-}
-
-/* Background wrapper to hold decorative blobs */
-.bg-decor { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
-.content { position: relative; z-index: 10; }
-
-/* small helper for fade animations */
-.fade-in-slow { animation: fadeIn 0.9s ease both; }
