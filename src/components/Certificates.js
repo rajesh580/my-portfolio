@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 // FIX: Removed unused 'FaImage' import, added 'FaExternalLinkAlt'
-import { FaFileCode, FaTimes, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaFileCode, FaTimes } from 'react-icons/fa';
 import certificates from '../data/certificates.json';
 import { useTheme } from '../context/ThemeContext'; // Import theme hook
 
@@ -9,6 +9,12 @@ function Certificates() {
   const { theme } = useTheme(); // Get theme
   const defaultCertificate = certificates.length > 0 ? certificates[0] : null;
   const [selectedCert, setSelectedCert] = useState(defaultCertificate);
+  const [imgLoading, setImgLoading] = useState(true);
+
+  useEffect(() => {
+    // When selected certificate changes, show loading placeholder
+    setImgLoading(true);
+  }, [selectedCert]);
 
   return (
     // Use theme-aware colors: bg-background
@@ -104,16 +110,7 @@ function Certificates() {
                       {selectedCert.description}
                     </p>
                     
-                    <a
-                      href={selectedCert.credentialUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      // Use theme-aware colors: bg-primary, hover:bg-primary-accent
-                      className="inline-flex items-center bg-primary text-white font-medium py-3 px-6 rounded-lg shadow-lg hover:bg-primary-accent transition duration-300 mb-10 transform hover:scale-105"
-                    >
-                      Verify Credential
-                      <FaExternalLinkAlt className="ml-2" />
-                    </a>
+                    {/* Verify Credential removed as requested */}
 
                     {/* Certificate Image */}
                     <div>
@@ -123,11 +120,16 @@ function Certificates() {
                       </h4>
                       {/* Use theme-aware colors: bg-background */}
                       <div className="bg-background rounded-lg p-4 shadow-inner">
+                        {imgLoading && (
+                          <div className="w-full h-64 md:h-80 lg:h-96 bg-gray-200 dark:bg-gray-700 rounded-md shimmer" />
+                        )}
+
                         <img
                           src={selectedCert.imageUrl}
                           alt={`${selectedCert.title} Certificate`}
-                          className="w-full h-auto rounded-md object-contain max-h-[400px]"
-                          onError={(e) => { e.target.src = 'https://placehold.co/800x600/111827/9CA3AF?text=Add+Your+Certificate+Image'; }}
+                          onLoad={() => setImgLoading(false)}
+                          onError={(e) => { setImgLoading(false); e.target.src = 'https://placehold.co/800x600/111827/9CA3AF?text=Add+Your+Certificate+Image'; }}
+                          className={`w-full h-auto rounded-md object-contain max-h-[400px] ${imgLoading ? 'hidden' : 'block'}`}
                         />
                       </div>
                     </div>

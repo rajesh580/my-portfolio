@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 // FIX: 'FaGithub' is now imported, 'FaLinkedin' is removed
 import { FaGithub } from 'react-icons/fa';
@@ -6,6 +6,7 @@ import { useTheme } from '../context/ThemeContext'; // Import theme hook
 
 function Home() {
   const { theme } = useTheme(); // Get current theme
+  const [imgLoading, setImgLoading] = useState(true);
 
   return (
     // Use theme-aware color: bg-background
@@ -57,14 +58,22 @@ function Home() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="md:w-1/3"
+          className="md:w-1/3 flex justify-center"
         >
-          <img
-            src="/images/profile.jpg" // Path from public folder
-            alt="Rajesh Rajoli"
-            // Use theme-aware colors: border-background
-            className="rounded-full shadow-glow-lg w-64 h-64 md:w-80 md:h-80 object-cover mx-auto border-4 border-background"
-          />
+          <div className="relative">
+            {imgLoading && (
+              <div className="rounded-full bg-gray-200 dark:bg-gray-700 w-64 h-64 md:w-80 md:h-80 mx-auto border-4 border-background shimmer" />
+            )}
+
+            <img
+              src={`${process.env.PUBLIC_URL}/images/profile.jpg`} // Use PUBLIC_URL for reliable public path
+              alt="Rajesh Rajoli"
+              onLoad={() => setImgLoading(false)}
+              onError={(e) => { setImgLoading(false); }}
+              // Use theme-aware colors: border-background
+              className={`rounded-full shadow-glow-lg w-64 h-64 md:w-80 md:h-80 object-cover mx-auto border-4 border-background ${imgLoading ? 'hidden' : 'block'}`}
+            />
+          </div>
         </motion.div>
 
       </div>

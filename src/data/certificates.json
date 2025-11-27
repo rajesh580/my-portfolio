@@ -4,79 +4,61 @@
     "title": "Legacy JavaScript Algorithms and Data Structures Developer Certification",
     "issuer": "freeCodeCamp",
     "description": "This is a Legacy JavaScript Algorithms and Data Structures Developer Certification from freeCodeCamp. It certifies that Rajesh Rajoli completed approximately 300 hours of work. The certification was obtained on September 14, 2024.",
-    "imageUrl": "https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/src/components/Screenshot%202025-11-10%20123640.png",
-    "credentialUrl": "https://www.freecodecamp.org/certification/rajesh_raj__/javascript-algorithms-and-data-structures"
+    "imageUrl": "https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/src/components/Screenshot%202025-11-10%20123640.png"
   },
   {
     "id": 2,
     "title": "Building Responsive Landing Page Using HTML And CSS",
     "issuer": "Geekster",
-    "description": null,
-    "imageUrl": "https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/src/components/Screenshot%202025-11-10%20123601.png",
-    "credentialUrl": "#"
-  },
-  {
+    "description": "Built a responsive landing page using semantic HTML and modern CSS practices.\nImplemented mobile-first design and cross-browser compatibility.",
+    "imageUrl": "https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/src/components/Screenshot%202025-11-10%20123601.png"
+  },{
     "id": 3,
     "title": "C Programming Course",
     "issuer": "Infosys",
-    "description": null,
-    "imageUrl": "https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/src/components/Screenshot%202025-11-10%20123617.png",
-    "credentialUrl": "#"
-  },
-  {
+    "description": "Completed foundational C programming coursework focused on core syntax and problem-solving.\nGained hands-on experience with pointers, arrays, and memory management.",
+    "imageUrl": "https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/src/components/Screenshot%202025-11-10%20123617.png"
+  },{
     "id": 4,
     "title": "SQL and Relational Databases 101",
     "issuer": "IBM (Cognitive Class)",
-    "description": null,
-    "imageUrl": "https://github.com/rajesh580/my-portfolio/blob/main/src/components/Screenshot%202025-11-10%20123659.png?raw=true",
-    "credentialUrl": "#"
-  },
-  {
+    "description": "Introduction to SQL and relational database concepts with practical exercises.\nLearned schema design, joins, and writing optimized queries.",
+    "imageUrl": "https://github.com/rajesh580/my-portfolio/blob/main/src/components/Screenshot%202025-11-10%20123659.png?raw=true"
+  },{
     "id": 5,
     "title": "Data Analysis with Python",
     "issuer": "IBM (Cognitive Class)",
-    "description": null,
-    "imageUrl": "https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/src/components/Screenshot%202025-11-10%20123650.png",
-    "credentialUrl": "#"
-  },
-  {
+    "description": "Covered data analysis techniques using Python and libraries like pandas and matplotlib.\nCompleted projects showcasing data cleaning, transformation, and visualization.",
+    "imageUrl": "https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/src/components/Screenshot%202025-11-10%20123650.png"
+  },{
     "id": 6,
     "title": "Python 101 for Data Science",
     "issuer": "IBM (Cognitive Class)",
-    "description": null,
-    "imageUrl": "https://drive.google.com/uc?id=10-XzM3-v6c1-y-O9h-R7p-L7-D1r-WqA",
-    "credentialUrl": "#"
-  },
-  {
+    "description": "Introductory Python course emphasizing data science fundamentals and scripting.\nPracticed working with data types, control flow, and essential libraries.",
+    "imageUrl": "https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/src/components/Screenshot%202025-11-10%20123709.png"
+  },{
     "id": 7,
     "title": "Introduction to Prompt Engineering for Generative AI",
-    "issuer": "Unknown",
-    "description": null,
-    "imageUrl": "https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/src/components/Screenshot%202025-11-10%20123631.png",
-    "credentialUrl": "#"
-  },
-  {
+    "issuer": "LinkedIn Learning",
+    "description": "Studied prompt engineering principles for generative AI models and best practices.\nExplored techniques to craft effective prompts and evaluate model outputs.",
+    "imageUrl": "https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/src/components/Screenshot%202025-11-10%20123631.png"
+  },{
     "id": 8,
     "title": "Python Programming",
-    "issuer": "Unknown",
-    "description": null,
-    "imageUrl": "https://github.com/rajesh580/my-portfolio/blob/main/src/components/Screenshot%202025-11-10%20123716.png?raw=true",
-    "credentialUrl": "#"
-  },
-  {
+    "issuer": "Infosys Springboard",
+    "description": "Comprehensive Python programming course covering core concepts and syntax.\nBuilt small applications to reinforce programming logic and debugging skills.",
+    "imageUrl": "https://github.com/rajesh580/my-portfolio/blob/main/src/components/Screenshot%202025-11-10%20123716.png?raw=true"
+  },{
     "id": 9,
     "title": "AI TOOLS Workshop",
-    "issuer": "Unknown",
-    "description": null,
-    "imageUrl": "https://github.com/rajesh580/my-portfolio/blob/main/src/components/Screenshot%202025-11-10%20123755.png?raw=true",
-    "credentialUrl": "#"
-  },
-  {
-    "id": 9,
+    "issuer": "TSIAR",
+    "description": "Participated in a hands-on workshop exploring modern AI tools and workflows.\nLearned practical use cases and integration techniques for productivity.",
+    "imageUrl": "https://github.com/rajesh580/my-portfolio/blob/main/src/components/Screenshot%202025-11-10%20123755.png?raw=true"
+  },{
+    "id": 10,
     "title": "Cyber Security Workshop",
-    "issuer": "Unknown",
-    "description": null,
-    "imageUrl": "https://github.com/rajesh580/my-portfolio/blob/main/src/components/Screenshot%202025-11-10%20123821.png?raw=true",
-    "credentialUrl": "#"
+    "issuer": "TSIAR",
+    "description": "Attended a cybersecurity workshop focused on fundamentals and defensive techniques.\nCovered common vulnerabilities, threat mitigation, and best practices.",
+    "imageUrl": "https://github.com/rajesh580/my-portfolio/blob/main/src/components/Screenshot%202025-11-10%20123821.png?raw=true"
   }
 ]

@@ -9,6 +9,7 @@ import {
   FaNodeJs,
   FaGitAlt,
   FaPython,
+  FaJava
 } from 'react-icons/fa';
 import { SiMongodb, SiFlask, SiTailwindcss, SiCplusplus } from 'react-icons/si';
 import { useTheme } from '../context/ThemeContext'; // Import theme hook
@@ -24,6 +25,7 @@ const skills = [
   { name: 'Python', color: 'text-blue-600', icon: FaPython },
   { name: 'Flask', color: 'text-gray-400', icon: SiFlask }, 
   { name: 'C++', color: 'text-blue-700', icon: SiCplusplus },
+  {name: 'java', color: 'text-red-600', icon: FaJava },
   { name: 'MongoDB', color: 'text-green-700', icon: SiMongodb },
   { name: 'Git', color: 'text-red-500', icon: FaGitAlt },
 ];
