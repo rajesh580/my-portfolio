@@ -7,16 +7,16 @@ function Footer() {
 
   return (
     // Use theme-aware colors: bg-surface, text-text-muted
-    <section id="contact" className="bg-surface text-text-muted py-20">
-      <div className="container mx-auto text-center px-6 lg:px-20">
+    <section id="contact" className="bg-surface text-text-muted py-16 md:py-20">
+      <div className="container mx-auto text-center px-4 sm:px-6 lg:px-20">
         {/* Use theme-aware colors: text-text */}
-        <h2 className={`text-3xl font-display font-bold mb-8 text-text ${theme === 'neon' ? 'text-glow' : ''}`}>
+        <h2 className={`text-2xl sm:text-3xl font-display font-bold mb-6 sm:mb-8 text-text ${theme === 'neon' ? 'text-glow' : ''}`}>
           Contact Me
         </h2>
-        <p className="text-lg mb-8 max-w-lg mx-auto">
+        <p className="text-base sm:text-lg mb-6 sm:mb-8 max-w-lg mx-auto px-2">
           I'm always open to discussing new projects, creative ideas, or opportunities.
         </p>
-        <div className="flex justify-center space-x-8 mb-10">
+        <div className="flex flex-wrap justify-center gap-6 sm:gap-8 mb-8 sm:mb-10 px-2">
           {/* LinkedIn */}
           <a
             href="https://www.linkedin.com/in/rajesh-rajoli"
@@ -26,7 +26,7 @@ function Footer() {
             className="hover:text-primary transition duration-300 transform hover:scale-125"
             aria-label="LinkedIn Profile"
           >
-            <FaLinkedin className="text-4xl" />
+            <FaLinkedin className="text-3xl sm:text-4xl" />
           </a>
           {/* GitHub */}
           <a
@@ -36,7 +36,7 @@ function Footer() {
             className="hover:text-primary transition duration-300 transform hover:scale-125"
             aria-label="GitHub Profile"
           >
-            <FaGithub className="text-4xl" />
+            <FaGithub className="text-3xl sm:text-4xl" />
           </a>
           {/* Instagram */}
           <a
@@ -46,7 +46,7 @@ function Footer() {
             className="hover:text-primary transition duration-300 transform hover:scale-125"
             aria-label="Instagram Profile"
           >
-            <FaInstagram className="text-4xl" />
+            <FaInstagram className="text-3xl sm:text-4xl" />
           </a>
           {/* Email */}
           <a
@@ -54,10 +54,10 @@ function Footer() {
             className="hover:text-primary transition duration-300 transform hover:scale-125"
             aria-label="Email Me"
           >
-            <FaEnvelope className="text-4xl" />
+            <FaEnvelope className="text-3xl sm:text-4xl" />
           </a>
         </div>
-        <p className="text-sm text-text-muted">
+        <p className="text-xs sm:text-sm text-text-muted px-2">
           &copy; {new Date().getFullYear()} Rajesh Rajoli. All rights reserved.
         </p>
       </div>

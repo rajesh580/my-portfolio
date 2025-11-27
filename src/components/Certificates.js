@@ -18,21 +18,19 @@ function Certificates() {
 
   return (
     // Use theme-aware colors: bg-background
-    <section id="certificates" className="bg-background py-20 md:py-28">
-      <div className="container mx-auto px-6 lg:px-20">
+    <section id="certificates" className="bg-background py-16 md:py-28">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-20">
         {/* Use theme-aware colors: text-text */}
-        <h2 className={`text-4xl font-display font-bold text-center text-text mb-16 ${theme === 'neon' ? 'text-glow' : ''}`}>
+        <h2 className={`text-3xl sm:text-4xl font-display font-bold text-center text-text mb-8 sm:mb-16 ${theme === 'neon' ? 'text-glow' : ''}`}>
           Licenses & Certificates
         </h2>
 
         {/* VS Code style layout */}
         {/* Use theme-aware colors: bg-surface, border-surface */}
-        <div className="bg-surface rounded-lg shadow-2xl min-h-[600px] flex flex-col md:flex-row overflow-hidden border border-surface">
-          
-          {/* Sidebar (File Explorer) */}
+        <div className="bg-surface rounded-lg shadow-2xl min-h-[600px] flex flex-col md:flex-row overflow-hidden border border-surface w-full">\n          {/* Sidebar (File Explorer) */}
           {/* Use theme-aware colors: bg-background, text-text, text-text-muted */}
-          <div className="w-full md:w-1/4 lg:w-1/5 bg-background p-4 flex-shrink-0 border-r border-surface">
-            <h3 className="text-text font-semibold text-sm uppercase tracking-wider mb-4">
+          <div className="w-full md:w-1/4 lg:w-1/5 bg-background p-3 sm:p-4 flex-shrink-0 border-r border-surface max-h-64 md:max-h-none overflow-y-auto md:overflow-visible">
+            <h3 className="text-text font-semibold text-xs sm:text-sm uppercase tracking-wider mb-2 sm:mb-4">
               Explorer
             </h3>
             <p className="text-text-muted text-xs uppercase font-bold mb-2">
@@ -43,7 +41,7 @@ function Certificates() {
                 <li key={cert.id}>
                   <button
                     onClick={() => setSelectedCert(cert)}
-                    className={`w-full text-left px-3 py-1.5 rounded-md flex items-center text-sm transition-colors ${
+                    className={`w-full text-left px-2 sm:px-3 py-1 sm:py-1.5 rounded-md flex items-center text-xs sm:text-sm transition-colors ${
                       selectedCert && selectedCert.id === cert.id
                         ? 'bg-primary/20 text-primary' // Active file
                         : 'text-text-muted hover:bg-surface' // Inactive file
@@ -63,7 +61,7 @@ function Certificates() {
             {/* Use theme-aware colors: bg-background, bg-surface, text-primary, text-text-muted */}
             <div className="bg-background flex-shrink-0">
               {selectedCert && (
-                <div className="inline-flex items-center bg-surface px-4 py-2 text-primary border-t-2 border-primary">
+                <div className="inline-flex items-center bg-surface px-3 sm:px-4 py-2 text-primary border-t-2 border-primary text-xs sm:text-sm overflow-x-auto max-w-full">
                   <FaFileCode className="mr-2" />
                   <span className="text-sm">{selectedCert.title}.png</span>
                   <button
@@ -96,17 +94,16 @@ function Certificates() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3 }}
-                  className="flex-grow p-8 overflow-y-auto"
-                >
+                  className="flex-grow p-6 md:p-8 overflow-y-auto text-sm sm:text-base">
                   <div className="max-w-3xl mx-auto">
                     {/* Use theme-aware colors: text-text, text-primary */}
-                    <h3 className={`text-3xl font-display font-bold text-text mb-3 ${theme === 'neon' ? 'text-glow' : ''}`}>
+                    <h3 className={`text-2xl sm:text-3xl font-display font-bold text-text mb-2 sm:mb-3 ${theme === 'neon' ? 'text-glow' : ''}`}>
                       {selectedCert.title}
                     </h3>
-                    <p className="text-lg text-primary font-semibold mb-6">
+                    <p className="text-base sm:text-lg text-primary font-semibold mb-4 sm:mb-6">
                       Issued by: {selectedCert.issuer}
                     </p>
-                    <p className="text-text-muted text-base mb-6">
+                    <p className="text-sm sm:text-base text-text-muted mb-4 sm:mb-6">
                       {selectedCert.description}
                     </p>
                     
@@ -115,7 +112,7 @@ function Certificates() {
                     {/* Certificate Image */}
                     <div>
                       {/* Use theme-aware colors: text-text */}
-                      <h4 className="text-xl font-display font-semibold text-text mb-4">
+                      <h4 className="text-lg sm:text-xl font-display font-semibold text-text mb-3 sm:mb-4">
                         Certificate Image
                       </h4>
                       {/* Use theme-aware colors: bg-background */}

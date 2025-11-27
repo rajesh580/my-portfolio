@@ -17,10 +17,10 @@ function Projects() {
 
   return (
     // Use theme-aware colors: bg-surface
-    <section id="projects" className="bg-surface py-20 md:py-28">
-      <div className="container mx-auto px-6 lg:px-20">
+    <section id="projects" className="bg-surface py-16 md:py-28">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-20">
         {/* Use theme-aware colors: text-text */}
-        <h2 className={`text-4xl font-display font-bold text-center text-text mb-16 ${theme === 'neon' ? 'text-glow' : ''}`}>
+        <h2 className={`text-3xl sm:text-4xl font-display font-bold text-center text-text mb-8 sm:mb-16 ${theme === 'neon' ? 'text-glow' : ''}`}>
           My Projects
         </h2>
         <motion.div
@@ -28,7 +28,7 @@ function Projects() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
           transition={{ staggerChildren: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10"
         >
           {/* FIX: Map over projects from JSON */}
           {projects.map((project, index) => (
@@ -45,22 +45,22 @@ function Projects() {
                 onClick={() => setSelectedProject(project)}
                 onError={(e) => { e.target.src = 'https://placehold.co/600x400/1F2937/9CA3AF?text=Project+Image'; }}
               />
-              <div className="p-6 flex flex-col flex-grow">
+              <div className="p-4 sm:p-6 flex flex-col flex-grow">
                 {/* Use theme-aware colors: text-text */}
-                <h3 className="text-xl font-bold font-display text-text mb-2">
+                <h3 className="text-lg sm:text-xl font-bold font-display text-text mb-2">
                   {project.title}
                 </h3>
                 {/* Use theme-aware colors: text-text-muted */}
-                <p className="text-text-muted mb-4 flex-grow">
+                <p className="text-sm sm:text-base text-text-muted mb-4 flex-grow">
                   {project.description}
                 </p>
 
                 {/* Tags - Use theme-aware colors: bg-primary/10 text-primary */}
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-4 text-xs sm:text-sm">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full"
+                      className="bg-primary/10 text-primary text-xs font-semibold px-2 sm:px-3 py-1 rounded-full"
                     >
                       {tag}
                     </span>
@@ -68,12 +68,12 @@ function Projects() {
                 </div>
 
                 {/* Links - Use theme-aware colors: text-text-muted hover:text-primary */}
-                <div className="flex justify-start space-x-6 mt-auto">
+                <div className="flex flex-wrap justify-start gap-4 sm:space-x-6 mt-auto text-sm sm:text-base">
                   <a
                     href={project.githubLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-text-muted hover:text-primary transition duration-200 flex items-center text-lg"
+                    className="text-text-muted hover:text-primary transition duration-200 flex items-center"
                     aria-label={`${project.title} GitHub Repository`}
                   >
                     <FaGithub className="mr-2" /> GitHub
@@ -83,7 +83,7 @@ function Projects() {
                       href={project.liveDemo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-text-muted hover:text-primary transition duration-200 flex items-center text-lg"
+                      className="text-text-muted hover:text-primary transition duration-200 flex items-center"
                       aria-label={`${project.title} Live Demo`}
                     >
                       <FaExternalLinkAlt className="mr-2" /> Live Demo

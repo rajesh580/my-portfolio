@@ -40,10 +40,10 @@ function Skills() {
 
   return (
     // Use theme-aware colors: bg-background
-    <section id="skills" className="py-20 md:py-28 bg-background">
-      <div className="container mx-auto px-6 lg:px-20">
+    <section id="skills" className="py-16 md:py-28 bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-20">
         {/* Use theme-aware colors: text-text */}
-        <h2 className={`text-4xl font-display font-bold text-center text-text mb-16 ${theme === 'neon' ? 'text-glow' : ''}`}>
+        <h2 className={`text-3xl sm:text-4xl font-display font-bold text-center text-text mb-8 sm:mb-16 ${theme === 'neon' ? 'text-glow' : ''}`}>
           My Skills
         </h2>
         <motion.div
@@ -51,7 +51,7 @@ function Skills() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           transition={{ staggerChildren: 0.1 }}
-          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 md:gap-8"
         >
           {skills.map((skill, index) => (
             <motion.div
@@ -62,15 +62,15 @@ function Skills() {
                 transition: { duration: 0.2 },
               }}
               // Use theme-aware colors: bg-surface
-              className="bg-surface rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-all"
+              className="bg-surface rounded-lg shadow-lg p-4 sm:p-6 text-center hover:shadow-xl transition-all"
             >
               {/* FIX: Render the icon as a component */}
               <skill.icon
-                className={`${skill.color} text-6xl mx-auto`}
+                className={`${skill.color} text-4xl sm:text-5xl md:text-6xl mx-auto`}
                 aria-hidden="true"
               />
               {/* Use theme-aware colors: text-text */}
-              <p className="text-lg text-text mt-4 font-semibold">
+              <p className="text-sm sm:text-base md:text-lg text-text mt-2 sm:mt-4 font-semibold">
                 {skill.name}
               </p>
             </motion.div>
