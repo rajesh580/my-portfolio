@@ -27,7 +27,7 @@ function Certificates() {
 
         {/* VS Code style layout */}
         {/* Use theme-aware colors: bg-surface, border-surface */}
-        <div className="bg-surface rounded-lg shadow-2xl min-h-[600px] flex flex-col md:flex-row overflow-hidden border border-surface w-full">\n          {/* Sidebar (File Explorer) */}
+        <div className="bg-surface rounded-lg shadow-2xl min-h-[600px] flex flex-col md:flex-row overflow-hidden border border-surface w-full">{/* Sidebar (File Explorer) */}
           {/* Use theme-aware colors: bg-background, text-text, text-text-muted */}
           <div className="w-full md:w-1/4 lg:w-1/5 bg-background p-3 sm:p-4 flex-shrink-0 border-r border-surface max-h-64 md:max-h-none overflow-y-auto md:overflow-visible">
             <h3 className="text-text font-semibold text-xs sm:text-sm uppercase tracking-wider mb-2 sm:mb-4">
