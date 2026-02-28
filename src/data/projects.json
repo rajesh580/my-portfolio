@@ -36,18 +36,6 @@
     "featured": false
   },
   {
-    "id": 927270418,
-    "title": "media-transcriber",
-    "imageUrl":"https://opengraph.githubassets.com/ecf7e34228080a62e2ff821585aede2ba90366408958240b5bcd52cf3410e542/rajesh580/media-transcriber",
-    "description": "Media transcriber tools and examples",
-    "githubLink": "https://github.com/rajesh580/media-transcriber",
-    "liveDemo": "",
-    "tags": ["Python","audio"],
-    "tech": ["Python"],
-    "year": 2025,
-    "featured": false
-  },
-  {
     "id": 924226924,
     "title": "my-portfolio",
     "imageUrl": "https://opengraph.githubassets.com/4589df2cd5bf96e1fd6fbf7c592a599e327c11c0dd1435d2818aeaf66163ff6a/rajesh580/my-portfolio" ,
@@ -68,6 +56,18 @@
     "liveDemo": "",
     "tags": ["computer-vision","web"],
     "tech": ["JavaScript"],
+    "year": 2025,
+    "featured": false
+  },
+  {
+    "id": 1122334455,
+    "title": "CryptoPriceTracker",
+    "imageUrl": "https://opengraph.githubassets.com/0/rajesh580/CryptoPriceTracker",
+    "description": "A real-time cryptocurrency price tracker application displaying live data from public APIs.",
+    "githubLink": "https://github.com/rajesh580/CryptoPriceTracker",
+    "liveDemo": "",
+    "tags": ["React","crypto","web"],
+    "tech": ["React","API"],
     "year": 2025,
     "featured": false
   }
