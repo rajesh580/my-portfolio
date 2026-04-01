@@ -43,9 +43,12 @@ function Skills() {
     <section id="skills" className="py-16 md:py-28 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-20">
         {/* Use theme-aware colors: text-text */}
-        <h2 className={`text-3xl sm:text-4xl font-display font-bold text-center text-text mb-8 sm:mb-16 ${theme === 'neon' ? 'text-glow' : ''}`}>
+        <h2 className={`text-3xl sm:text-4xl font-display font-bold text-center text-text mb-4 sm:mb-6 ${theme === 'neon' ? 'text-glow' : ''}`}>
           My Skills
         </h2>
+        <p className="text-center text-sm sm:text-base text-text-muted max-w-2xl mx-auto mb-8">
+          I work with a wide range of technologies, from frontend frameworks to backend services and cloud workflows.
+        </p>
         <motion.div
           initial="hidden"
           whileInView="visible"

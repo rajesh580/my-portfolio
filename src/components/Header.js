@@ -93,26 +93,35 @@ function Header() {
 
   return (
     // Use theme-aware colors: bg-surface, text-text
-    <header className="bg-surface/90 text-text py-4 sticky top-0 z-50 backdrop-blur-sm shadow-md">
+    <header className="bg-surface/90 text-text py-4 sticky top-0 z-50 backdrop-blur-xl border-b border-surface shadow-lg">
       <nav className="container mx-auto px-6 lg:px-20 flex justify-between items-center">
-        <a href="#home" className="text-2xl font-display font-bold text-glow">
+        <a href="#home" className="text-2xl sm:text-3xl font-display font-black tracking-wider text-primary hover:text-primary-accent transition-colors">
           Rajesh Rajoli
         </a>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-6">
-          <ul className="flex space-x-6">
+          <ul className="flex space-x-5 items-center">
             {links.map((link) => (
               <li key={link.name}>
                 <a
                   href={link.href}
-                  className="font-medium hover:text-primary transition duration-200"
+                  className="font-medium text-text-muted hover:text-primary transition duration-200 px-3 py-2 rounded-lg hover:bg-primary/10"
                 >
                   {link.name}
                 </a>
               </li>
             ))}
           </ul>
+
+          <a
+            href="https://drive.google.com/uc?export=download&id=1CNUXbAgFJP5FNTBN9lDZn1j_riAES4QG"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-2 px-4 py-2 text-sm font-semibold rounded-lg text-white bg-primary hover:bg-primary-accent transition duration-200 shadow-md"
+          >
+            Download Resume
+          </a>
 
           {/* FIX: Add the new ThemeSwitcher */}
           <ThemeSwitcher />

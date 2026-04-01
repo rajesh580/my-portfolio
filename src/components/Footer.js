@@ -7,7 +7,7 @@ function Footer() {
 
   return (
     // Use theme-aware colors: bg-surface, text-text-muted
-    <section id="contact" className="bg-surface text-text-muted py-16 md:py-20">
+    <section id="contact" className="bg-gradient-to-t from-background via-surface to-blue-900/10 text-text-muted py-16 md:py-20 border-t border-surface">
       <div className="container mx-auto text-center px-4 sm:px-6 lg:px-20">
         {/* Use theme-aware colors: text-text */}
         <h2 className={`text-2xl sm:text-3xl font-display font-bold mb-6 sm:mb-8 text-text ${theme === 'neon' ? 'text-glow' : ''}`}>

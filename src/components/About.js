@@ -35,6 +35,27 @@ function About() {
               that push me to grow. I thrive on collaboration and creating
               impactful solutions.
             </p>
+
+            <div className="rounded-xl bg-background p-4 md:p-6 shadow-md border border-surface mb-8">
+              <h3 className="text-xl font-display font-bold text-text mb-3">Core Strengths</h3>
+              <div className="space-y-3">
+                {[
+                  { name: 'React / Frontend', value: 90 },
+                  { name: 'Python / Backend', value: 85 },
+                  { name: 'Data Analysis', value: 80 },
+                ].map((item) => (
+                  <div key={item.name}>
+                    <div className="flex justify-between text-sm text-text-muted mb-1">
+                      <span>{item.name}</span>
+                      <span>{item.value}%</span>
+                    </div>
+                    <div className="h-2 bg-surface rounded-full overflow-hidden">
+                      <div className="h-2 bg-primary rounded-full" style={{ width: `${item.value}%` }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* 3-column feature */}

@@ -2,7 +2,7 @@
   {
     "id": 981434494,
     "title": "E-commerce",
-    "imageUrl":"https://opengraph.githubassets.com/ae85c3114e835d31369f853420b5d3e1c7372a63a4c4f863715ed44793d7b3f2/rajesh580/E-commerce",
+    "imageUrl":"https://opengraph.githubassets.com/1/rajesh580/E-commerce",
     "description": "This is a e commerce website with admin panel, which have maximum features without any databases",
     "githubLink": "https://github.com/rajesh580/E-commerce",
     "liveDemo": "",
@@ -14,7 +14,7 @@
   {
     "id": 902330152,
     "title": "face_recognition",
-    "imageUrl": "https://opengraph.githubassets.com/76d4549eb0fc1b3c1ff79c792ed94e1c79d21a4512ddeca62dced7ab1ec6ca98/rajesh580/face_recognition",
+    "imageUrl": "https://opengraph.githubassets.com/1/rajesh580/face_recognition",
     "description": "Face recognition repository (Python/OpenCV)",
     "githubLink": "https://github.com/rajesh580/face_recognition",
     "liveDemo": "",
@@ -26,7 +26,7 @@
   {
     "id": 890227533,
     "title": "flask_chatApp",
-    "imageUrl": "https://opengraph.githubassets.com/69ca8d17b9f9a2fa7d5ed971a91a1a6b242b4cc0c3db740c23363a1ecc8ca786/rajesh580/flask_chatApp",
+    "imageUrl": "https://opengraph.githubassets.com/1/rajesh580/flask_chatApp",
     "description": "Real-time chat app built with Flask",
     "githubLink": "https://github.com/rajesh580/flask_chatApp",
     "liveDemo": "",
@@ -38,7 +38,7 @@
   {
     "id": 924226924,
     "title": "my-portfolio",
-    "imageUrl": "https://opengraph.githubassets.com/4589df2cd5bf96e1fd6fbf7c592a599e327c11c0dd1435d2818aeaf66163ff6a/rajesh580/my-portfolio" ,
+    "imageUrl": "https://opengraph.githubassets.com/1/rajesh580/my-portfolio" ,
     "description": "My-portfolio is a personal portfolio website designed to showcase my skills, projects, achievements, and professional journey.",
     "githubLink": "https://github.com/rajesh580/my-portfolio",
     "liveDemo": "https://rajesh580.github.io/my-portfolio/",
@@ -50,7 +50,7 @@
   {
     "id": 1078063818,
     "title": "plant-disease-detection",
-    "imageUrl": "https://opengraph.githubassets.com/5821a13d2ca34309bf821928b5e1388e726034da9b06872c74108e3b294d1f6b/rajesh580/plant-disease-detection",
+    "imageUrl": "https://opengraph.githubassets.com/1/rajesh580/plant-disease-detection",
     "description": "Plant disease detection project",
     "githubLink": "https://github.com/rajesh580/plant-disease-detection",
     "liveDemo": "",
@@ -62,13 +62,37 @@
   {
     "id": 1122334455,
     "title": "CryptoPriceTracker",
-    "imageUrl": "https://opengraph.githubassets.com/0/rajesh580/CryptoPriceTracker",
+    "imageUrl": "https://opengraph.githubassets.com/1/rajesh580/CryptoPriceTracker",
     "description": "A real-time cryptocurrency price tracker application displaying live data from public APIs.",
     "githubLink": "https://github.com/rajesh580/CryptoPriceTracker",
     "liveDemo": "",
     "tags": ["React","crypto","web"],
     "tech": ["React","API"],
     "year": 2025,
+    "featured": false
+  },
+  {
+    "id": 2000100001,
+    "title": "Conversion Rate Optimization Model",
+    "imageUrl": "https://opengraph.githubassets.com/1/rajesh580/Conversion-Rate-Optimization-Model",
+    "description": "Conversion Rate Optimization (CRO) system with data-driven recommendation engine for landing page A/B testing and performance analytics.",
+    "githubLink": "https://github.com/rajesh580/Conversion-Rate-Optimization-Model",
+    "liveDemo": "",
+    "tags": ["ML","Analytics","Web"],
+    "tech": ["Python","Pandas","scikit-learn"],
+    "year": 2026,
+    "featured": true
+  },
+  {
+    "id": 2000100002,
+    "title": "lung-nodule-detection",
+    "imageUrl": "https://opengraph.githubassets.com/1/rajesh580/lung-nodule-detection",
+    "description": "AI-based lung nodule detection project for medical imaging, combining deep learning segmentation and classification workflows.",
+    "githubLink": "https://github.com/rajesh580/lung-nodule-detection",
+    "liveDemo": "",
+    "tags": ["AI","Healthcare","Computer Vision"],
+    "tech": ["Python","TensorFlow","OpenCV"],
+    "year": 2026,
     "featured": false
   }
 ]

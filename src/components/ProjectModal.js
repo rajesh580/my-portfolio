@@ -6,6 +6,20 @@ import { useTheme } from '../context/ThemeContext'; // Import theme hook
 function ProjectModal({ project, onClose }) {
   const { theme } = useTheme(); // Get theme
 
+  const defaultProjectImage = 'https://placehold.co/800x450/111827/9CA3AF?text=Project+Preview';
+  const getProjectImage = (project) => {
+    if (project?.imageUrl) {
+      return project.imageUrl;
+    }
+    if (project?.githubLink) {
+      const match = project.githubLink.match(/github\.com\/([^/]+)\/([^/]+)/);
+      if (match) {
+        return `https://opengraph.githubassets.com/1/${match[1]}/${match[2]}`;
+      }
+    }
+    return defaultProjectImage;
+  };
+
   const backdropVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
@@ -52,10 +66,10 @@ function ProjectModal({ project, onClose }) {
 
             <div className="p-6 overflow-y-auto">
               <img
-                src={project.imageUrl}
+                src={getProjectImage(project)}
                 alt={project.title}
                 className="w-full h-auto max-h-64 object-cover rounded-md mb-6"
-                onError={(e) => { e.target.src = 'https://placehold.co/600x400/1F2937/9CA3AF?text=Project+Image'; }}
+                onError={(e) => { e.target.onerror = null; e.target.src = defaultProjectImage; }}
               />
               {/* Use theme-aware colors */}
               <p className="text-text-muted mb-6">{project.description}</p>

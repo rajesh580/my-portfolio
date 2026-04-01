@@ -10,8 +10,12 @@ function Home() {
 
   return (
     // Use theme-aware color: bg-background
-    <section id="home" className="bg-background py-16 md:py-32">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-20 flex flex-col md:flex-row items-center justify-between gap-8">
+    <section id="home" className="relative overflow-hidden bg-gradient-to-br from-blue-900/10 via-background to-surface py-16 md:py-32">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute top-0 left-1/4 w-72 h-72 rounded-full bg-primary/20 blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-secondary/20 blur-3xl" />
+      </div>
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-20 flex flex-col lg:flex-row items-center justify-between gap-8">
         
         {/* Text Content */}
         <motion.div 
@@ -36,7 +40,6 @@ function Home() {
           <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-3 sm:space-x-4">
             <a
               href="#projects"
-              // Use theme-aware colors: bg-primary, hover:bg-primary-accent
               className="bg-primary text-white font-medium py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow-lg hover:bg-primary-accent transition duration-300 transform hover:scale-105 text-sm sm:text-base"
             >
               View My Work
@@ -45,11 +48,21 @@ function Home() {
               href="https://github.com/rajesh580"
               target="_blank"
               rel="noopener noreferrer"
-              // Use theme-aware colors: bg-surface, text-text
               className="bg-surface text-text font-medium py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow-lg hover:bg-surface/70 transition duration-300 transform hover:scale-105 flex items-center justify-center text-sm sm:text-base"
             >
               <FaGithub className="mr-2" /> GitHub
             </a>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 mt-8">
+            <div className="bg-surface border border-primary/20 p-4 rounded-xl shadow-sm">
+              <h4 className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">Experience</h4>
+              <p className="text-2xl font-bold text-text">2+ yrs</p>
+            </div>
+            <div className="bg-surface border border-primary/20 p-4 rounded-xl shadow-sm">
+              <h4 className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">Projects</h4>
+              <p className="text-2xl font-bold text-text">8</p>
+            </div>
           </div>
         </motion.div>
 

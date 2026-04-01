@@ -9,12 +9,61 @@ function Certificates() {
   const { theme } = useTheme(); // Get theme
   const defaultCertificate = certificates.length > 0 ? certificates[0] : null;
   const [selectedCert, setSelectedCert] = useState(defaultCertificate);
+  const [visibleCert, setVisibleCert] = useState(defaultCertificate);
   const [imgLoading, setImgLoading] = useState(true);
+  const [loadedCertImages, setLoadedCertImages] = useState({});
+
+  const certificatePlaceholder = 'https://placehold.co/800x600/111827/9CA3AF?text=Certificate+Preview';
+  const getCertificateImage = (cert) => {
+    if (!cert) return certificatePlaceholder;
+    if (cert.imageUrl) return cert.imageUrl;
+    if (cert.githubLink) {
+      const match = cert.githubLink.match(/github\.com\/([^/]+)\/([^/]+)/);
+      if (match) return `https://opengraph.githubassets.com/1/${match[1]}/${match[2]}`;
+    }
+    return certificatePlaceholder;
+  };
 
   useEffect(() => {
-    // When selected certificate changes, show loading placeholder
+    if (!selectedCert) return;
+
     setImgLoading(true);
+
+    const imageUrl = getCertificateImage(selectedCert);
+    const img = new Image();
+    img.src = imageUrl;
+
+    img.onload = () => {
+      setLoadedCertImages((prev) => ({ ...prev, [selectedCert.id]: true }));
+      setVisibleCert(selectedCert);
+      setImgLoading(false);
+    };
+
+    img.onerror = () => {
+      setLoadedCertImages((prev) => ({ ...prev, [selectedCert.id]: false }));
+      setVisibleCert(selectedCert);
+      setImgLoading(false);
+    };
+
+    return () => {
+      img.onload = null;
+      img.onerror = null;
+    };
   }, [selectedCert]);
+
+  useEffect(() => {
+    certificates.forEach((cert) => {
+      if (!cert) return;
+      const img = new Image();
+      img.src = getCertificateImage(cert);
+      img.onload = () => {
+        setLoadedCertImages((prev) => ({ ...prev, [cert.id]: true }));
+      };
+      img.onerror = () => {
+        setLoadedCertImages((prev) => ({ ...prev, [cert.id]: false }));
+      };
+    });
+  }, []);
 
   return (
     // Use theme-aware colors: bg-background
@@ -89,7 +138,7 @@ function Certificates() {
                 </motion.div>
               ) : (
                 <motion.div
-                  key={selectedCert.id}
+                  key={visibleCert?.id || 'empty'}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
@@ -98,13 +147,13 @@ function Certificates() {
                   <div className="max-w-3xl mx-auto">
                     {/* Use theme-aware colors: text-text, text-primary */}
                     <h3 className={`text-2xl sm:text-3xl font-display font-bold text-text mb-2 sm:mb-3 ${theme === 'neon' ? 'text-glow' : ''}`}>
-                      {selectedCert.title}
+                      {visibleCert?.title || 'No certificate selected'}
                     </h3>
                     <p className="text-base sm:text-lg text-primary font-semibold mb-4 sm:mb-6">
-                      Issued by: {selectedCert.issuer}
+                      Issued by: {visibleCert?.issuer || 'N/A'}
                     </p>
                     <p className="text-sm sm:text-base text-text-muted mb-4 sm:mb-6">
-                      {selectedCert.description}
+                      {visibleCert?.description || 'Please select a certificate to view details.'}
                     </p>
                     
                     {/* Verify Credential removed as requested */}
@@ -116,17 +165,29 @@ function Certificates() {
                         Certificate Image
                       </h4>
                       {/* Use theme-aware colors: bg-background */}
-                      <div className="bg-background rounded-lg p-4 shadow-inner">
-                        {imgLoading && (
+                      <div className="bg-background rounded-lg p-4 shadow-inner relative overflow-hidden">
+                        {(!loadedCertImages[visibleCert?.id] || imgLoading) && (
                           <div className="w-full h-64 md:h-80 lg:h-96 bg-gray-200 dark:bg-gray-700 rounded-md shimmer" />
                         )}
 
                         <img
-                          src={selectedCert.imageUrl}
-                          alt={`${selectedCert.title} Certificate`}
-                          onLoad={() => setImgLoading(false)}
-                          onError={(e) => { setImgLoading(false); e.target.src = 'https://placehold.co/800x600/111827/9CA3AF?text=Add+Your+Certificate+Image'; }}
-                          className={`w-full h-auto rounded-md object-contain max-h-[400px] ${imgLoading ? 'hidden' : 'block'}`}
+                          src={getCertificateImage(visibleCert)}
+                          alt={`${visibleCert?.title || 'Certificate'} Certificate`}
+                          onLoad={() => {
+                            setImgLoading(false);
+                            if (visibleCert) {
+                              setLoadedCertImages((prev) => ({ ...prev, [visibleCert.id]: true }));
+                            }
+                          }}
+                          onError={(e) => {
+                            setImgLoading(false);
+                            e.target.onerror = null;
+                            e.target.src = certificatePlaceholder;
+                            if (visibleCert) {
+                              setLoadedCertImages((prev) => ({ ...prev, [visibleCert.id]: false }));
+                            }
+                          }}
+                          className={`w-full h-auto rounded-md object-contain max-h-[400px] ${imgLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-500`}
                         />
                       </div>
                     </div>
