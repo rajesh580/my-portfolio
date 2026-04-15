@@ -9,7 +9,7 @@
     "tags": ["JavaScript","web"],
     "tech": ["JavaScript"],
     "year": 2025,
-    "featured": true
+    "featured": false
   },
   {
     "id": 902330152,
@@ -81,7 +81,7 @@
     "tags": ["ML","Analytics","Web"],
     "tech": ["Python","Pandas","scikit-learn"],
     "year": 2026,
-    "featured": true
+    "featured": false
   },
   {
     "id": 2000100002,
@@ -94,5 +94,14 @@
     "tech": ["Python","TensorFlow","OpenCV"],
     "year": 2026,
     "featured": false
+  },
+    {
+    "title": "Goat India",
+    "description": "A project aimed at improving livelihood for rural families in India through goat farming.",
+    "tags": ["React", "Node.js", "Tailwind CSS"],
+    "imageUrl": "/images/goat-india.jpg", 
+    "liveDemo": "https://goatindia.in", 
+    "year": 2026,
+    "featured": true
   }
 ]
