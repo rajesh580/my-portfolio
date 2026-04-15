@@ -61,7 +61,7 @@ function Home() {
             </div>
             <div className="bg-surface border border-primary/20 p-4 rounded-xl shadow-sm">
               <h4 className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">Projects</h4>
-              <p className="text-2xl font-bold text-text">8</p>
+              <p className="text-2xl font-bold text-text">9</p>
             </div>
           </div>
         </motion.div>

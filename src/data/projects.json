@@ -95,13 +95,14 @@
     "year": 2026,
     "featured": false
   },
-    {
+    {"id": 2000100003,
     "title": "Goat India",
-    "description": "A project aimed at improving livelihood for rural families in India through goat farming.",
+    "description": "Goat India a E-commerce website for selling tshirts, hoodies and other merchandise. It features a user-friendly interface, secure payment gateway integration, and a responsive design for seamless shopping experience across devices.(Note: This Project is working and live if you really want to order then only you can order)",
     "tags": ["React", "Node.js", "Tailwind CSS"],
-    "imageUrl": "/images/goat-india.jpg", 
+    "imageUrl": "https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/public/images/GoatIndia.png", 
     "liveDemo": "https://goatindia.in", 
     "year": 2026,
+    "tech": ["React","NodeJS","PHP","Tailwind"],
     "featured": true
   }
 ]
