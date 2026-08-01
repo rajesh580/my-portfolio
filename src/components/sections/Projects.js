@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import projects from '../data/projects.json';
-import ProjectModal from './ProjectModal';
-import { useTheme } from '../context/ThemeContext'; // Import theme hook
+import projects from '../../data/projects.json';
+import ProjectModal from '../ui/ProjectModal';
+import { useTheme } from '../../context/ThemeContext';
 
 function Projects() {
-  const { theme } = useTheme(); // Get theme
+  const { theme } = useTheme();
   const [selectedProject, setSelectedProject] = useState(null);
   const [loadedImages, setLoadedImages] = useState({});
 

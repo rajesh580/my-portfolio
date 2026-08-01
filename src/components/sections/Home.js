@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 // FIX: 'FaGithub' is now imported, 'FaLinkedin' is removed
 import { FaGithub } from 'react-icons/fa';
-import { useTheme } from '../context/ThemeContext'; // Import theme hook
+import { useTheme } from '../../context/ThemeContext';
 
 function Home() {
   const { theme } = useTheme(); // Get current theme
@@ -108,7 +108,7 @@ function Home() {
             )}
 
             <img
-              src={`https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/public/images/profile.jpg`}
+              src={`${process.env.PUBLIC_URL}/images/profile.jpg`}
               alt="Rajesh Rajoli"
               onLoad={() => setImgLoading(false)}
               onError={(e) => { setImgLoading(false); }}

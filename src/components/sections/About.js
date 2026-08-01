@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaCode, FaGraduationCap, FaLightbulb } from 'react-icons/fa';
-import { useTheme } from '../context/ThemeContext'; // Import theme hook
+import { useTheme } from '../../context/ThemeContext';
 
 function About() {
   const { theme } = useTheme(); // Get current theme

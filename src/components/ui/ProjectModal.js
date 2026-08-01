@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaTimes, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import { useTheme } from '../context/ThemeContext'; // Import theme hook
+import { useTheme } from '../../context/ThemeContext';
 
 function ProjectModal({ project, onClose }) {
   const { theme } = useTheme(); // Get theme

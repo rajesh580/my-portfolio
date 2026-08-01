@@ -12,7 +12,7 @@ import {
   FaJava
 } from 'react-icons/fa';
 import { SiMongodb, SiFlask, SiTailwindcss, SiCplusplus } from 'react-icons/si';
-import { useTheme } from '../context/ThemeContext'; // Import theme hook
+import { useTheme } from '../../context/ThemeContext';
 
 // FIX: Define skills with react-icons components
 const skills = [

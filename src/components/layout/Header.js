@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FaBars, FaTimes, FaPalette } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 // FIX: Import the useTheme hook AND the themes array
-import { useTheme, themes } from '../context/ThemeContext'; 
+import { useTheme, themes } from '../../context/ThemeContext';
 
 // --- NEW THEME SWITCHER COMPONENT ---
 const ThemeSwitcher = () => {

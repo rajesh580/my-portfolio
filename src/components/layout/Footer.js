@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaLinkedin, FaInstagram, FaEnvelope, FaGithub } from 'react-icons/fa';
-import { useTheme } from '../context/ThemeContext'; // Import theme hook
+import { useTheme } from '../../context/ThemeContext';
 
 function Footer() {
   const { theme } = useTheme(); // Get theme

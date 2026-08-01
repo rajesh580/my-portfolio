@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-// FIX: Removed unused 'FaImage' import, added 'FaExternalLinkAlt'
 import { FaFileCode, FaTimes } from 'react-icons/fa';
-import certificates from '../data/certificates.json';
-import { useTheme } from '../context/ThemeContext'; // Import theme hook
+import certificates from '../../data/certificates.json';
+import { useTheme } from '../../context/ThemeContext';
 
 function Certificates() {
-  const { theme } = useTheme(); // Get theme
+  const { theme } = useTheme();
   const defaultCertificate = certificates.length > 0 ? certificates[0] : null;
   const [selectedCert, setSelectedCert] = useState(defaultCertificate);
   const [visibleCert, setVisibleCert] = useState(defaultCertificate);
@@ -16,7 +15,12 @@ function Certificates() {
   const certificatePlaceholder = 'https://placehold.co/800x600/111827/9CA3AF?text=Certificate+Preview';
   const getCertificateImage = (cert) => {
     if (!cert) return certificatePlaceholder;
-    if (cert.imageUrl) return cert.imageUrl;
+    if (cert.imageUrl) {
+      if (cert.imageUrl.startsWith('/')) {
+        return `${process.env.PUBLIC_URL}${cert.imageUrl}`;
+      }
+      return cert.imageUrl;
+    }
     if (cert.githubLink) {
       const match = cert.githubLink.match(/github\.com\/([^/]+)\/([^/]+)/);
       if (match) return `https://opengraph.githubassets.com/1/${match[1]}/${match[2]}`;

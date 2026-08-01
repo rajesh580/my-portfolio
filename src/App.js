@@ -1,14 +1,13 @@
 import React from 'react';
 
-import Header from './components/Header';
-import Home from './components/Home';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-// FIX: Import the new Certificates component
-import Certificates from './components/Certificates'; 
-import Footer from './components/Footer';
-import ScrollToTop from './components/ScrollToTop';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import ScrollToTop from './components/layout/ScrollToTop';
+import Home from './components/sections/Home';
+import About from './components/sections/About';
+import Skills from './components/sections/Skills';
+import Projects from './components/sections/Projects';
+import Certificates from './components/sections/Certificates';
 
 function App() {
   return (
