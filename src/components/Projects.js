@@ -16,8 +16,13 @@ function Projects() {
 
   const defaultProjectImage = 'https://placehold.co/800x450/111827/9CA3AF?text=Project+Preview';
   const getProjectImage = (project) => {
+    // If imageUrl is present, handle it
     if (project?.imageUrl) {
-      return project.imageUrl;
+      // If it's a local path, prepend the public URL for deployment
+      if (project.imageUrl.startsWith('/')) {
+        return `${process.env.PUBLIC_URL}${project.imageUrl}`;
+      }
+      return project.imageUrl; // Otherwise, it's a full URL
     }
     if (project?.githubLink) {
       const match = project.githubLink.match(/github\.com\/([^/]+)\/([^/]+)/);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 // FIX: 'FaGithub' is now imported, 'FaLinkedin' is removed
 import { FaGithub } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext'; // Import theme hook
@@ -7,6 +7,14 @@ import { useTheme } from '../context/ThemeContext'; // Import theme hook
 function Home() {
   const { theme } = useTheme(); // Get current theme
   const [imgLoading, setImgLoading] = useState(true);
+  const shouldReduceMotion = useReducedMotion();
+
+  const orbitAnimation = shouldReduceMotion
+    ? {}
+    : {
+        rotate: 360,
+        y: [0, -10, 0, 10, 0],
+      };
 
   return (
     // Use theme-aware color: bg-background
@@ -74,6 +82,27 @@ function Home() {
           className="md:w-1/3 flex justify-center"
         >
           <div className="relative">
+            <motion.div
+              aria-hidden="true"
+              className="pointer-events-none absolute -top-6 -right-8 z-10 hidden h-24 w-24 items-center justify-center rounded-full border border-primary/30 bg-surface/80 shadow-glow-lg backdrop-blur-md sm:flex md:h-28 md:w-28"
+              animate={orbitAnimation}
+              transition={{
+                rotate: { duration: 16, repeat: Infinity, ease: 'linear' },
+                y: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
+              }}
+            >
+              <motion.div
+                className="absolute inset-3 rounded-full border border-dashed border-primary/50"
+                animate={shouldReduceMotion ? {} : { rotate: -360 }}
+                transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
+              />
+              <span className="relative font-display text-2xl font-extrabold text-primary md:text-3xl">
+                &lt;/&gt;
+              </span>
+              <span className="absolute -bottom-1 left-4 h-3 w-3 rounded-full bg-primary" />
+              <span className="absolute right-3 top-4 h-2 w-2 rounded-full bg-primary-accent" />
+            </motion.div>
+
             {imgLoading && (
               <div className="rounded-full bg-gray-200 dark:bg-gray-700 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 mx-auto border-4 border-background shimmer" />
             )}
