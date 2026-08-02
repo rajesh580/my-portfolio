@@ -38,7 +38,7 @@ function ScrollBackground() {
         style={{ y, rotate, scale }}
         animate={shouldReduceMotion ? {} : { x: [0, 24, 0], y: [0, -10, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -left-24 top-16 h-72 w-72 rounded-full bg-primary/10 blur-3xl md:h-96 md:w-96"
+        className="absolute -left-28 top-20 h-52 w-52 rounded-full bg-primary/10 blur-3xl md:-left-24 md:top-16 md:h-96 md:w-96"
       />
 
       <motion.div
@@ -46,7 +46,7 @@ function ScrollBackground() {
         style={{ y: yReverse, rotate: rotate, scale }}
         animate={shouldReduceMotion ? {} : { x: [0, -18, 0], y: [0, 18, 0] }}
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -right-24 top-[45vh] h-80 w-80 rounded-full bg-primary-accent/10 blur-3xl md:h-[28rem] md:w-[28rem]"
+        className="absolute -right-32 top-[52vh] h-56 w-56 rounded-full bg-primary-accent/10 blur-3xl md:-right-24 md:top-[45vh] md:h-[28rem] md:w-[28rem]"
       />
 
       <motion.svg
@@ -54,7 +54,7 @@ function ScrollBackground() {
         viewBox="0 0 1200 760"
         preserveAspectRatio="xMidYMid slice"
         style={{ x: ribbonX, y: ribbonY, rotate: ribbonRotate, opacity: ribbonOpacity }}
-        className="absolute inset-0 h-full w-full"
+        className="absolute inset-0 h-full w-full opacity-60 sm:opacity-100"
       >
         <defs>
           <filter id="neon-ribbon-glow" x="-20%" y="-20%" width="140%" height="140%">
@@ -70,7 +70,7 @@ function ScrollBackground() {
           d="M-120 520 C 95 355, 215 735, 420 535 S 695 155, 900 315 S 1100 680, 1320 450"
           fill="none"
           stroke="hsl(var(--color-primary) / 0.58)"
-          strokeWidth="18"
+          strokeWidth="10"
           strokeLinecap="round"
           strokeLinejoin="round"
           pathLength={ribbonPath}
@@ -80,7 +80,7 @@ function ScrollBackground() {
           d="M-120 520 C 95 355, 215 735, 420 535 S 695 155, 900 315 S 1100 680, 1320 450"
           fill="none"
           stroke="hsl(var(--color-primary-accent) / 0.48)"
-          strokeWidth="4"
+          strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
           pathLength={ribbonPath}
@@ -98,7 +98,7 @@ function ScrollBackground() {
 
       <motion.div
         aria-hidden="true"
-        className="absolute inset-0 opacity-[0.045]"
+        className="absolute inset-0 opacity-[0.025] sm:opacity-[0.045]"
         animate={shouldReduceMotion ? {} : { opacity: [0.03, 0.06, 0.03] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         style={{

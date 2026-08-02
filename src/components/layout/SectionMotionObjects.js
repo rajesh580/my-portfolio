@@ -17,7 +17,7 @@ function SectionMotionObjects({ variant = 'default' }) {
       <motion.div
         aria-hidden="true"
         style={{ x: driftX, y: driftY, rotate, opacity: fade }}
-        className="absolute -right-10 top-16 h-52 w-52 rounded-full border border-primary/35 bg-primary/5 shadow-glow-lg backdrop-blur-sm sm:h-72 sm:w-72"
+        className="absolute -right-16 top-12 h-36 w-36 rounded-full border border-primary/25 bg-primary/5 backdrop-blur-sm sm:-right-10 sm:top-16 sm:h-72 sm:w-72 sm:border-primary/35 sm:shadow-glow-lg"
       >
         <motion.div
           animate={shouldReduceMotion ? {} : { rotate: 360 }}
@@ -32,13 +32,13 @@ function SectionMotionObjects({ variant = 'default' }) {
         viewBox="0 0 520 280"
         preserveAspectRatio="none"
         style={{ x: driftY, y: driftX, opacity: fade }}
-        className="absolute bottom-4 left-[-4rem] h-44 w-[32rem] max-w-none sm:h-56"
+        className="absolute bottom-8 left-[-7rem] h-32 w-[26rem] max-w-none sm:bottom-4 sm:left-[-4rem] sm:h-56 sm:w-[32rem]"
       >
         <motion.path
           d="M18 210 C 95 70, 170 260, 250 130 S 390 38, 500 165"
           fill="none"
           stroke="hsl(var(--color-primary) / 0.52)"
-          strokeWidth="7"
+          strokeWidth="5"
           strokeLinecap="round"
           pathLength={pathLength}
         />

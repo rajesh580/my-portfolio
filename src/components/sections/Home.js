@@ -61,7 +61,7 @@ function Home() {
       <motion.div
         aria-hidden="true"
         style={{ x: circuitX, y: circuitY }}
-        className="pointer-events-none absolute right-0 top-28 h-52 w-64 opacity-70 sm:h-64 sm:w-80"
+        className="pointer-events-none absolute -right-20 top-28 h-40 w-56 opacity-35 sm:right-0 sm:h-64 sm:w-80 sm:opacity-70"
       >
         <svg viewBox="0 0 320 250" className="h-full w-full">
           <motion.path
