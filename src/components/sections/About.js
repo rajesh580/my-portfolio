@@ -3,14 +3,16 @@ import { motion } from 'framer-motion';
 import { FaCode, FaGraduationCap, FaLightbulb } from 'react-icons/fa';
 import { useTheme } from '../../context/ThemeContext';
 import { fadeUp, scaleIn, staggerContainer, viewportOnce } from '../../utils/animations';
+import SectionMotionObjects from '../layout/SectionMotionObjects';
 
 function About() {
   const { theme } = useTheme(); // Get current theme
 
   return (
     // Use theme-aware colors: bg-surface
-    <section id="about" className="bg-surface py-16 md:py-28">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-20">
+    <section id="about" className="relative overflow-hidden bg-surface/45 py-16 md:py-28">
+      <SectionMotionObjects variant="about" />
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-20">
         <motion.div
           variants={staggerContainer}
           initial="hidden"

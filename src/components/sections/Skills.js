@@ -14,6 +14,7 @@ import {
 import { SiMongodb, SiFlask, SiTailwindcss, SiCplusplus } from 'react-icons/si';
 import { useTheme } from '../../context/ThemeContext';
 import { fadeUp, scaleIn, staggerContainer, viewportOnce } from '../../utils/animations';
+import SectionMotionObjects from '../layout/SectionMotionObjects';
 
 // FIX: Define skills with react-icons components
 const skills = [
@@ -36,8 +37,9 @@ function Skills() {
 
   return (
     // Use theme-aware colors: bg-background
-    <section id="skills" className="py-16 md:py-28 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-20">
+    <section id="skills" className="relative overflow-hidden py-16 md:py-28 bg-background/35">
+      <SectionMotionObjects variant="skills" />
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-20">
         {/* Use theme-aware colors: text-text */}
         <motion.h2
           variants={fadeUp}

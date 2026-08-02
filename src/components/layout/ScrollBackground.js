@@ -9,6 +9,11 @@ function ScrollBackground() {
   const yReverse = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? [0, 0] : [0, 110]);
   const rotate = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? [0, 0] : [0, 14]);
   const scale = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? [1, 1] : [1, 1.12]);
+  const ribbonX = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? ['0%', '0%'] : ['-9%', '8%']);
+  const ribbonY = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? ['0%', '0%'] : ['9%', '-13%']);
+  const ribbonRotate = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? [-8, -8] : [-8, 12]);
+  const ribbonPath = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? [0.85, 0.85] : [0.22, 1]);
+  const ribbonOpacity = useTransform(scrollYProgress, [0, 0.18, 0.82, 1], [0.18, 0.48, 0.42, 0.2]);
 
   const orb1X = useTransform(scrollYProgress, [0, 1], ['18%', '62%']);
   const orb1Y = useTransform(scrollYProgress, [0, 1], ['10%', '42%']);
@@ -43,6 +48,53 @@ function ScrollBackground() {
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute -right-24 top-[45vh] h-80 w-80 rounded-full bg-primary-accent/10 blur-3xl md:h-[28rem] md:w-[28rem]"
       />
+
+      <motion.svg
+        aria-hidden="true"
+        viewBox="0 0 1200 760"
+        preserveAspectRatio="xMidYMid slice"
+        style={{ x: ribbonX, y: ribbonY, rotate: ribbonRotate, opacity: ribbonOpacity }}
+        className="absolute inset-0 h-full w-full"
+      >
+        <defs>
+          <filter id="neon-ribbon-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="7" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <motion.path
+          d="M-120 520 C 95 355, 215 735, 420 535 S 695 155, 900 315 S 1100 680, 1320 450"
+          fill="none"
+          stroke="hsl(var(--color-primary) / 0.58)"
+          strokeWidth="18"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          pathLength={ribbonPath}
+          filter="url(#neon-ribbon-glow)"
+        />
+        <motion.path
+          d="M-120 520 C 95 355, 215 735, 420 535 S 695 155, 900 315 S 1100 680, 1320 450"
+          fill="none"
+          stroke="hsl(var(--color-primary-accent) / 0.48)"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          pathLength={ribbonPath}
+        />
+        <motion.circle
+          cx="900"
+          cy="315"
+          r="12"
+          fill="hsl(var(--color-primary-accent) / 0.65)"
+          animate={shouldReduceMotion ? {} : { scale: [1, 1.45, 1], opacity: [0.5, 0.9, 0.5] }}
+          transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+          filter="url(#neon-ribbon-glow)"
+        />
+      </motion.svg>
 
       <motion.div
         aria-hidden="true"

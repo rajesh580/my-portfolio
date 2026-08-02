@@ -3,19 +3,21 @@ import { FaLinkedin, FaInstagram, FaEnvelope, FaGithub } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
 import { fadeUp, staggerContainer, viewportOnce } from '../../utils/animations';
+import SectionMotionObjects from './SectionMotionObjects';
 
 function Footer() {
   const { theme } = useTheme(); // Get theme
 
   return (
     // Use theme-aware colors: bg-surface, text-text-muted
-    <section id="contact" className="bg-gradient-to-t from-background via-surface to-blue-900/10 text-text-muted py-16 md:py-20 border-t border-surface">
+    <section id="contact" className="relative overflow-hidden bg-gradient-to-t from-background/70 via-surface/45 to-blue-900/10 text-text-muted py-16 md:py-20 border-t border-surface">
+      <SectionMotionObjects variant="contact" />
       <motion.div
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={viewportOnce}
-        className="container mx-auto text-center px-4 sm:px-6 lg:px-20"
+        className="relative z-10 container mx-auto text-center px-4 sm:px-6 lg:px-20"
       >
         {/* Use theme-aware colors: text-text */}
         <motion.h2 variants={fadeUp} className={`text-2xl sm:text-3xl font-display font-bold mb-6 sm:mb-8 text-text ${theme === 'neon' ? 'text-glow' : ''}`}>

@@ -5,6 +5,7 @@ import projects from '../../data/projects.json';
 import ProjectModal from '../ui/ProjectModal';
 import { useTheme } from '../../context/ThemeContext';
 import { fadeUp, scaleIn, staggerContainer, viewportOnce } from '../../utils/animations';
+import SectionMotionObjects from '../layout/SectionMotionObjects';
 
 function Projects() {
   const { theme } = useTheme();
@@ -55,15 +56,15 @@ function Projects() {
       whileHover={{ y: -4 }}
       className={`group bg-background shadow-lg rounded-xl overflow-hidden flex flex-col transition-all duration-300 transform ${highlight ? 'lg:scale-100 shadow-2xl' : 'hover:shadow-2xl'} `}
     >
-      <div className="relative overflow-hidden">
+      <div className={`relative overflow-hidden bg-surface ${highlight ? 'h-64 sm:h-80' : 'h-48'}`}>
         {!loadedImages[project.id] && (
-          <div className={`absolute inset-0 ${highlight ? 'h-80' : 'h-48'} bg-surface shimmer`} />
+          <div className="absolute inset-0 bg-surface shimmer" />
         )}
 
         <img
           src={getProjectImage(project)}
           alt={project.title}
-          className={`w-full ${highlight ? 'h-80' : 'h-48'} object-cover cursor-pointer transition-opacity duration-500 ${loadedImages[project.id] ? 'opacity-100' : 'opacity-0'}`}
+          className={`h-full w-full object-contain cursor-pointer transition-opacity duration-500 ${loadedImages[project.id] ? 'opacity-100' : 'opacity-0'}`}
           onClick={() => setSelectedProject(project)}
           onLoad={() => setLoadedImages((prev) => ({ ...prev, [project.id]: true }))}
           onError={(e) => {
@@ -74,7 +75,7 @@ function Projects() {
           loading="eager"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
         <span
           className="absolute top-3 left-3 text-xs font-bold px-2 py-1 rounded-full bg-primary text-white uppercase tracking-wide"
@@ -134,8 +135,9 @@ function Projects() {
   );
 
   return (
-    <section id="projects" className="bg-surface py-16 md:py-28">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-20">
+    <section id="projects" className="relative overflow-hidden bg-surface/45 py-16 md:py-28">
+      <SectionMotionObjects variant="projects" />
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-20">
         <motion.h2
           variants={fadeUp}
           initial="hidden"

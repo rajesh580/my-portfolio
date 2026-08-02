@@ -3,6 +3,7 @@ import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'fr
 import certificates from '../../data/certificates.json';
 import { useTheme } from '../../context/ThemeContext';
 import { fadeUp, scaleIn, viewportOnce } from '../../utils/animations';
+import SectionMotionObjects from '../layout/SectionMotionObjects';
 
 function Certificates() {
   const { theme } = useTheme();
@@ -68,8 +69,9 @@ function Certificates() {
     <section
       id="certificates"
       ref={sectionRef}
-      className="relative h-[320vh] bg-background"
+      className="relative h-[320vh] bg-background/30"
     >
+      <SectionMotionObjects variant="certificates" />
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <motion.div
           style={{ scaleX: progressScaleX }}
@@ -148,6 +150,8 @@ function Certificates() {
                   <motion.img
                     src={getCertificateImage(cert)}
                     alt={`${cert.title} Certificate`}
+                    loading="eager"
+                    decoding="async"
                     initial={{ scale: 1.04, opacity: 0.82 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     whileHover={{ scale: 1.06 }}

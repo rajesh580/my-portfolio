@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 // FIX: 'FaGithub' is now imported, 'FaLinkedin' is removed
 import { FaGithub } from 'react-icons/fa';
 import { useTheme } from '../../context/ThemeContext';
@@ -8,7 +8,22 @@ import { fadeUp, staggerContainer } from '../../utils/animations';
 function Home() {
   const { theme } = useTheme(); // Get current theme
   const [imgLoading, setImgLoading] = useState(true);
+  const sectionRef = useRef(null);
   const shouldReduceMotion = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const codeTrailX = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? [0, 0] : [-40, 95]);
+  const codeTrailY = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? [0, 0] : [0, 140]);
+  const codeTrailRotate = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? [-8, -8] : [-8, 18]);
+  const circuitX = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? [0, 0] : [70, -110]);
+  const circuitY = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? [0, 0] : [-20, 120]);
+  const circuitPath = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? [1, 1] : [0.35, 1]);
+  const bracketY = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? [0, 0] : [0, -90]);
+  const bracketOpacity = useTransform(scrollYProgress, [0, 0.25, 1], [0.22, 0.6, 0.12]);
 
   const floatingBadgeAnimation = shouldReduceMotion
     ? {}
@@ -29,7 +44,65 @@ function Home() {
 
   return (
     // Use theme-aware color: bg-background
-    <section id="home" className="relative overflow-hidden bg-gradient-to-br from-blue-900/10 via-background to-surface py-16 md:py-32">
+    <section ref={sectionRef} id="home" className="relative overflow-hidden bg-gradient-to-br from-blue-900/10 via-background/60 to-surface/45 py-16 md:py-32">
+      <motion.div
+        aria-hidden="true"
+        style={{ x: codeTrailX, y: codeTrailY, rotate: codeTrailRotate }}
+        className="pointer-events-none absolute left-3 top-24 hidden rounded-xl border border-primary/20 bg-surface/35 px-5 py-4 font-mono text-sm text-primary shadow-glow-lg backdrop-blur-md sm:block"
+      >
+        <motion.span
+          animate={shouldReduceMotion ? {} : { opacity: [0.45, 1, 0.45] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          const build = &quot;ideas&quot;;
+        </motion.span>
+      </motion.div>
+
+      <motion.div
+        aria-hidden="true"
+        style={{ x: circuitX, y: circuitY }}
+        className="pointer-events-none absolute right-0 top-28 h-52 w-64 opacity-70 sm:h-64 sm:w-80"
+      >
+        <svg viewBox="0 0 320 250" className="h-full w-full">
+          <motion.path
+            d="M24 42 H118 L152 84 H270 M78 158 H148 L186 118 H298 M40 214 H116 L152 186 H245"
+            fill="none"
+            stroke="hsl(var(--color-primary) / 0.55)"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            pathLength={circuitPath}
+          />
+          <motion.path
+            d="M118 42 V20 M186 118 V92 M245 186 V218"
+            fill="none"
+            stroke="hsl(var(--color-primary-accent) / 0.5)"
+            strokeWidth="3"
+            strokeLinecap="round"
+            pathLength={circuitPath}
+          />
+          {[24, 270, 78, 298, 40, 245].map((cx, index) => (
+            <motion.circle
+              key={cx}
+              cx={cx}
+              cy={[42, 84, 158, 118, 214, 186][index]}
+              r="5"
+              fill="hsl(var(--color-primary) / 0.72)"
+              animate={shouldReduceMotion ? {} : { scale: [1, 1.55, 1] }}
+              transition={{ duration: 2.2, delay: index * 0.18, repeat: Infinity, ease: 'easeInOut' }}
+            />
+          ))}
+        </svg>
+      </motion.div>
+
+      <motion.div
+        aria-hidden="true"
+        style={{ y: bracketY, opacity: bracketOpacity }}
+        className="pointer-events-none absolute bottom-10 left-1/2 hidden -translate-x-1/2 font-mono text-8xl font-bold text-primary md:block"
+      >
+        {'{ }'}
+      </motion.div>
+
       <motion.div
         variants={staggerContainer}
         initial="hidden"
