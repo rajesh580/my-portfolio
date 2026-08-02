@@ -8,7 +8,7 @@ const ThemeContext = createContext();
 
 // 2. Create the provider component
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('light'); // Default theme
+  const [theme, setTheme] = useState('neon'); // Default theme
 
   // 3. Effect to apply the theme to the <html> element
   useEffect(() => {

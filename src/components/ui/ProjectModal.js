@@ -9,6 +9,10 @@ function ProjectModal({ project, onClose }) {
   const defaultProjectImage = 'https://placehold.co/800x450/111827/9CA3AF?text=Project+Preview';
   const getProjectImage = (project) => {
     if (project?.imageUrl) {
+      if (!/^https?:\/\//i.test(project.imageUrl)) {
+        const publicPath = project.imageUrl.replace(/^\/+/, '');
+        return `${process.env.PUBLIC_URL}/${publicPath}`;
+      }
       return project.imageUrl;
     }
     if (project?.githubLink) {

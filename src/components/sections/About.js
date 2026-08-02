@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaCode, FaGraduationCap, FaLightbulb } from 'react-icons/fa';
 import { useTheme } from '../../context/ThemeContext';
+import { fadeUp, scaleIn, staggerContainer, viewportOnce } from '../../utils/animations';
 
 function About() {
   const { theme } = useTheme(); // Get current theme
@@ -11,16 +12,16 @@ function About() {
     <section id="about" className="bg-surface py-16 md:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-20">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7 }}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
         >
           {/* Use theme-aware colors: text-text */}
-          <h2 className={`text-3xl sm:text-4xl font-display font-bold text-center text-text mb-8 sm:mb-12 ${theme === 'neon' ? 'text-glow' : ''}`}>
+          <motion.h2 variants={fadeUp} className={`text-3xl sm:text-4xl font-display font-bold text-center text-text mb-8 sm:mb-12 ${theme === 'neon' ? 'text-glow' : ''}`}>
             About Me
-          </h2>
-          <div className="max-w-3xl mx-auto text-center">
+          </motion.h2>
+          <motion.div variants={fadeUp} className="max-w-3xl mx-auto text-center">
             {/* Use theme-aware colors: text-text-muted, text-primary */}
             <p className="text-base sm:text-lg text-text-muted mb-4 sm:mb-6">
               Hi, I'm <strong className="text-primary">Rajesh Rajoli</strong>, a
@@ -36,7 +37,11 @@ function About() {
               impactful solutions.
             </p>
 
-            <div className="rounded-xl bg-background p-4 md:p-6 shadow-md border border-surface mb-8">
+            <motion.div
+              variants={scaleIn}
+              whileHover={{ y: -2 }}
+              className="rounded-xl bg-background p-4 md:p-6 shadow-md border border-surface mb-8"
+            >
               <h3 className="text-xl font-display font-bold text-text mb-3">Core Strengths</h3>
               <div className="space-y-3">
                 {[
@@ -50,18 +55,24 @@ function About() {
                       <span>{item.value}%</span>
                     </div>
                     <div className="h-2 bg-surface rounded-full overflow-hidden">
-                      <div className="h-2 bg-primary rounded-full" style={{ width: `${item.value}%` }} />
+                      <motion.div
+                        className="h-2 bg-primary rounded-full"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${item.value}%` }}
+                        viewport={{ once: true, amount: 0.7 }}
+                        transition={{ duration: 1, delay: 0.15, ease: 'easeOut' }}
+                      />
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* 3-column feature */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
+          <motion.div variants={staggerContainer} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
             {/* Use theme-aware colors: bg-background, text-primary, text-text, text-text-muted */}
-            <div className="text-center p-4 sm:p-6 bg-background rounded-lg shadow-lg">
+            <motion.div variants={scaleIn} whileHover={{ y: -3 }} className="text-center p-4 sm:p-6 bg-background rounded-lg shadow-lg">
               <FaCode className="text-4xl sm:text-5xl text-primary mx-auto mb-3 sm:mb-4" />
               <h3 className="text-lg sm:text-xl font-display font-semibold text-text mb-2">
                 Developer
@@ -70,8 +81,8 @@ function About() {
                 I build responsive, fast, and dynamic web applications using
                 modern technologies.
               </p>
-            </div>
-            <div className="text-center p-4 sm:p-6 bg-background rounded-lg shadow-lg">
+            </motion.div>
+            <motion.div variants={scaleIn} whileHover={{ y: -3 }} className="text-center p-4 sm:p-6 bg-background rounded-lg shadow-lg">
               <FaLightbulb className="text-4xl sm:text-5xl text-primary mx-auto mb-3 sm:mb-4" />
               <h3 className="text-lg sm:text-xl font-display font-semibold text-text mb-2">
                 Problem Solver
@@ -80,8 +91,8 @@ function About() {
                 I enjoy tackling complex challenges and finding clean, efficient
                 solutions.
               </p>
-            </div>
-            <div className="text-center p-4 sm:p-6 bg-background rounded-lg shadow-lg">
+            </motion.div>
+            <motion.div variants={scaleIn} whileHover={{ y: -3 }} className="text-center p-4 sm:p-6 bg-background rounded-lg shadow-lg">
               <FaGraduationCap className="text-4xl sm:text-5xl text-primary mx-auto mb-3 sm:mb-4" />
               <h3 className="text-lg sm:text-xl font-display font-semibold text-text mb-2">
                 Learner
@@ -90,8 +101,8 @@ function About() {
                 I'm a perpetual learner, always exploring new technologies and
                 industry trends.
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

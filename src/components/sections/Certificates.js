@@ -1,23 +1,58 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaFileCode, FaTimes } from 'react-icons/fa';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
 import certificates from '../../data/certificates.json';
 import { useTheme } from '../../context/ThemeContext';
+import { fadeUp, scaleIn, viewportOnce } from '../../utils/animations';
 
 function Certificates() {
   const { theme } = useTheme();
-  const defaultCertificate = certificates.length > 0 ? certificates[0] : null;
-  const [selectedCert, setSelectedCert] = useState(defaultCertificate);
-  const [visibleCert, setVisibleCert] = useState(defaultCertificate);
-  const [imgLoading, setImgLoading] = useState(true);
-  const [loadedCertImages, setLoadedCertImages] = useState({});
+  const shouldReduceMotion = useReducedMotion();
+  const carouselRef = useRef(null);
+  const viewportRef = useRef(null);
+  const sectionRef = useRef(null);
+  const [maxScroll, setMaxScroll] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  });
+
+  const xRange = shouldReduceMotion ? [0, 0] : [0, -maxScroll];
+  const rawX = useTransform(scrollYProgress, [0, 1], xRange);
+  const x = useSpring(rawX, { stiffness: 90, damping: 24, mass: 0.35 });
+  const headingY = useTransform(scrollYProgress, [0, 0.16, 0.88, 1], shouldReduceMotion ? [0, 0, 0, 0] : [24, 0, 0, -18]);
+  const headingOpacity = useTransform(scrollYProgress, [0, 0.12, 0.9, 1], [0.72, 1, 1, 0.72]);
+  const progressScaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.2 });
+
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    const viewport = viewportRef.current;
+    if (!carousel || !viewport) return;
+
+    const updateMaxScroll = () => {
+      setMaxScroll(Math.max(0, carousel.scrollWidth - viewport.clientWidth));
+    };
+
+    updateMaxScroll();
+
+    const resizeObserver = new ResizeObserver(updateMaxScroll);
+    resizeObserver.observe(carousel);
+    resizeObserver.observe(viewport);
+    window.addEventListener('resize', updateMaxScroll);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', updateMaxScroll);
+    };
+  }, []);
 
   const certificatePlaceholder = 'https://placehold.co/800x600/111827/9CA3AF?text=Certificate+Preview';
   const getCertificateImage = (cert) => {
     if (!cert) return certificatePlaceholder;
     if (cert.imageUrl) {
-      if (cert.imageUrl.startsWith('/')) {
-        return `${process.env.PUBLIC_URL}${cert.imageUrl}`;
+      if (!/^https?:\/\//i.test(cert.imageUrl)) {
+        const publicPath = cert.imageUrl.replace(/^\/+/, '');
+        return `${process.env.PUBLIC_URL}/${publicPath}`;
       }
       return cert.imageUrl;
     }
@@ -28,178 +63,103 @@ function Certificates() {
     return certificatePlaceholder;
   };
 
-  useEffect(() => {
-    if (!selectedCert) return;
-
-    setImgLoading(true);
-
-    const imageUrl = getCertificateImage(selectedCert);
-    const img = new Image();
-    img.src = imageUrl;
-
-    img.onload = () => {
-      setLoadedCertImages((prev) => ({ ...prev, [selectedCert.id]: true }));
-      setVisibleCert(selectedCert);
-      setImgLoading(false);
-    };
-
-    img.onerror = () => {
-      setLoadedCertImages((prev) => ({ ...prev, [selectedCert.id]: false }));
-      setVisibleCert(selectedCert);
-      setImgLoading(false);
-    };
-
-    return () => {
-      img.onload = null;
-      img.onerror = null;
-    };
-  }, [selectedCert]);
-
-  useEffect(() => {
-    certificates.forEach((cert) => {
-      if (!cert) return;
-      const img = new Image();
-      img.src = getCertificateImage(cert);
-      img.onload = () => {
-        setLoadedCertImages((prev) => ({ ...prev, [cert.id]: true }));
-      };
-      img.onerror = () => {
-        setLoadedCertImages((prev) => ({ ...prev, [cert.id]: false }));
-      };
-    });
-  }, []);
-
   return (
     // Use theme-aware colors: bg-background
-    <section id="certificates" className="bg-background py-16 md:py-28">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-20">
-        {/* Use theme-aware colors: text-text */}
-        <h2 className={`text-3xl sm:text-4xl font-display font-bold text-center text-text mb-8 sm:mb-16 ${theme === 'neon' ? 'text-glow' : ''}`}>
-          Licenses & Certificates
-        </h2>
-
-        {/* VS Code style layout */}
-        {/* Use theme-aware colors: bg-surface, border-surface */}
-        <div className="bg-surface rounded-lg shadow-2xl min-h-[600px] flex flex-col md:flex-row overflow-hidden border border-surface w-full">{/* Sidebar (File Explorer) */}
-          {/* Use theme-aware colors: bg-background, text-text, text-text-muted */}
-          <div className="w-full md:w-1/4 lg:w-1/5 bg-background p-3 sm:p-4 flex-shrink-0 border-r border-surface max-h-64 md:max-h-none overflow-y-auto md:overflow-visible">
-            <h3 className="text-text font-semibold text-xs sm:text-sm uppercase tracking-wider mb-2 sm:mb-4">
-              Explorer
-            </h3>
-            <p className="text-text-muted text-xs uppercase font-bold mb-2">
+    <section
+      id="certificates"
+      ref={sectionRef}
+      className="relative h-[320vh] bg-background"
+    >
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+        <motion.div
+          style={{ scaleX: progressScaleX }}
+          className="absolute left-0 top-0 h-1 w-full origin-left bg-primary"
+        />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-20">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          style={{ y: headingY, opacity: headingOpacity }}
+          className="mb-10 flex flex-col gap-4 md:mb-14 md:flex-row md:items-end md:justify-between"
+        >
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-primary mb-3">
               Certifications
             </p>
-            <ul>
-              {certificates.map((cert) => (
-                <li key={cert.id}>
-                  <button
-                    onClick={() => setSelectedCert(cert)}
-                    className={`w-full text-left px-2 sm:px-3 py-1 sm:py-1.5 rounded-md flex items-center text-xs sm:text-sm transition-colors ${
-                      selectedCert && selectedCert.id === cert.id
-                        ? 'bg-primary/20 text-primary' // Active file
-                        : 'text-text-muted hover:bg-surface' // Inactive file
-                    }`}
-                  >
-                    <FaFileCode className="mr-2 flex-shrink-0" />
-                    <span className="truncate">{cert.title}.png</span>
-                  </button>
-                </li>
-              ))}
-            </ul>
+            <h2 className={`text-3xl sm:text-4xl font-display font-bold text-text ${theme === 'neon' ? 'text-glow' : ''}`}>
+              Licenses & Certificates
+            </h2>
           </div>
 
-          {/* Main Content (Editor) */}
-          <div className="w-full md:w-3/4 lg:w-4/5 bg-surface flex flex-col">
-            {/* Tab Bar */}
-            {/* Use theme-aware colors: bg-background, bg-surface, text-primary, text-text-muted */}
-            <div className="bg-background flex-shrink-0">
-              {selectedCert && (
-                <div className="inline-flex items-center bg-surface px-3 sm:px-4 py-2 text-primary border-t-2 border-primary text-xs sm:text-sm overflow-x-auto max-w-full">
-                  <FaFileCode className="mr-2" />
-                  <span className="text-sm">{selectedCert.title}.png</span>
-                  <button
-                    onClick={() => setSelectedCert(null)}
-                    className="ml-4 text-text-muted hover:text-text"
-                  >
-                    <FaTimes />
-                  </button>
-                </div>
-              )}
-            </div>
+          <p className="max-w-xl text-sm sm:text-base text-text-muted">
+            A curated set of learning milestones and professional credentials, presented in a smooth horizontal showcase.
+          </p>
+        </motion.div>
 
-            {/* Certificate Viewer */}
-            <AnimatePresence>
-              {!selectedCert ? (
+        <motion.div
+          variants={scaleIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          ref={viewportRef}
+          className="overflow-hidden px-0 py-1"
+        >
+          <motion.div
+            ref={carouselRef}
+            style={{ x }}
+            className="flex w-max gap-4 pb-1"
+          >
+            {certificates.map((cert, index) => (
+              <motion.article
+                key={cert.id}
+                variants={fadeUp}
+                initial={{ opacity: 0, y: 30, rotate: index % 2 === 0 ? -1.5 : 1.5 }}
+                whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+                viewport={{ once: true, amount: 0.35 }}
+                transition={{ duration: 0.45, delay: index * 0.035, ease: 'easeOut' }}
+                whileHover={{
+                  y: -10,
+                  scale: 1.025,
+                  rotate: index % 2 === 0 ? 0.6 : -0.6,
+                  transition: { duration: 0.22, ease: 'easeOut' },
+                }}
+                className="group w-[280px] flex-none rounded-2xl border border-surface bg-background p-4 shadow-glow-lg sm:w-[320px]"
+              >
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="flex-grow flex flex-col items-center justify-center p-8 text-center"
+                  className="mb-3"
+                  initial={{ opacity: 0.85 }}
+                  whileHover={{ opacity: 1 }}
                 >
-                  {/* Use theme-aware colors: text-text-muted */}
-                  <p className="text-text-muted text-lg">
-                    Select a certificate from the explorer to view details.
+                  <p className="text-[11px] uppercase tracking-[0.24em] text-primary font-semibold mb-2">
+                    {cert.issuer}
                   </p>
+                  <h4 className={`text-lg font-display font-bold text-text leading-snug ${theme === 'neon' ? 'text-glow' : ''}`}>
+                    {cert.title}
+                  </h4>
                 </motion.div>
-              ) : (
+
                 <motion.div
-                  key={visibleCert?.id || 'empty'}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex-grow p-6 md:p-8 overflow-y-auto text-sm sm:text-base">
-                  <div className="max-w-3xl mx-auto">
-                    {/* Use theme-aware colors: text-text, text-primary */}
-                    <h3 className={`text-2xl sm:text-3xl font-display font-bold text-text mb-2 sm:mb-3 ${theme === 'neon' ? 'text-glow' : ''}`}>
-                      {visibleCert?.title || 'No certificate selected'}
-                    </h3>
-                    <p className="text-base sm:text-lg text-primary font-semibold mb-4 sm:mb-6">
-                      Issued by: {visibleCert?.issuer || 'N/A'}
-                    </p>
-                    <p className="text-sm sm:text-base text-text-muted mb-4 sm:mb-6">
-                      {visibleCert?.description || 'Please select a certificate to view details.'}
-                    </p>
-                    
-                    {/* Verify Credential removed as requested */}
-
-                    {/* Certificate Image */}
-                    <div>
-                      {/* Use theme-aware colors: text-text */}
-                      <h4 className="text-lg sm:text-xl font-display font-semibold text-text mb-3 sm:mb-4">
-                        Certificate Image
-                      </h4>
-                      {/* Use theme-aware colors: bg-background */}
-                      <div className="bg-background rounded-lg p-4 shadow-inner relative overflow-hidden">
-                        {(!loadedCertImages[visibleCert?.id] || imgLoading) && (
-                          <div className="w-full h-64 md:h-80 lg:h-96 bg-gray-200 dark:bg-gray-700 rounded-md shimmer" />
-                        )}
-
-                        <img
-                          src={getCertificateImage(visibleCert)}
-                          alt={`${visibleCert?.title || 'Certificate'} Certificate`}
-                          onLoad={() => {
-                            setImgLoading(false);
-                            if (visibleCert) {
-                              setLoadedCertImages((prev) => ({ ...prev, [visibleCert.id]: true }));
-                            }
-                          }}
-                          onError={(e) => {
-                            setImgLoading(false);
-                            e.target.onerror = null;
-                            e.target.src = certificatePlaceholder;
-                            if (visibleCert) {
-                              setLoadedCertImages((prev) => ({ ...prev, [visibleCert.id]: false }));
-                            }
-                          }}
-                          className={`w-full h-auto rounded-md object-contain max-h-[400px] ${imgLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-500`}
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  className="bg-surface rounded-xl p-2 overflow-hidden"
+                  whileHover={{ scale: 0.985 }}
+                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                >
+                  <motion.img
+                    src={getCertificateImage(cert)}
+                    alt={`${cert.title} Certificate`}
+                    initial={{ scale: 1.04, opacity: 0.82 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    whileHover={{ scale: 1.06 }}
+                    transition={{ duration: 0.45, ease: 'easeOut' }}
+                    viewport={{ once: true, amount: 0.4 }}
+                    className="w-full h-auto rounded-md object-contain max-h-[220px] will-change-transform"
+                  />
                 </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+              </motion.article>
+            ))}
+          </motion.div>
+        </motion.div>
         </div>
       </div>
     </section>

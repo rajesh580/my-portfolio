@@ -1,57 +1,52 @@
-import React, { useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 // FIX: 'FaGithub' is now imported, 'FaLinkedin' is removed
 import { FaGithub } from 'react-icons/fa';
-import { useTheme } from '../../context/ThemeContext';
-import { fadeUp, staggerContainer } from '../../utils/animations';
+import { useTheme } from '../context/ThemeContext'; // Import theme hook
 
 function Home() {
   const { theme } = useTheme(); // Get current theme
+  const ref = useRef(null);
   const [imgLoading, setImgLoading] = useState(true);
   const shouldReduceMotion = useReducedMotion();
 
-  const floatingBadgeAnimation = shouldReduceMotion
-    ? {}
-    : {
-        y: [0, -12, 0],
-        x: [0, 10, 0],
-        rotate: [0, 8, 0],
-      };
+  // Set up scroll tracking for the parallax effect
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"], // Track from when the top of the section hits the top of the viewport, until it leaves.
+  });
 
-  const floatingAura = shouldReduceMotion
+  const yBg1 = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const yBg2 = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+
+  const orbitAnimation = shouldReduceMotion
     ? {}
     : {
-        y: [0, -12, 0],
-        x: [0, 10, 0],
-        scale: [1, 1.08, 1],
-        opacity: [0.4, 0.78, 0.4],
+        y: ["-10%", "10%", "-10%"],
+        x: ["-8%", "8%", "-8%"],
+        rotate: [0, 360],
       };
 
   return (
     // Use theme-aware color: bg-background
-    <section id="home" className="relative overflow-hidden bg-gradient-to-br from-blue-900/10 via-background to-surface py-16 md:py-32">
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
-        className="relative container mx-auto px-4 sm:px-6 lg:px-20 flex flex-col lg:flex-row items-center justify-between gap-8"
-      >
+    <section ref={ref} id="home" className="relative overflow-hidden bg-gradient-to-br from-blue-900/10 via-background to-surface py-16 md:py-32">
+      <div className="pointer-events-none absolute inset-0">
         <motion.div
-          aria-hidden="true"
-          animate={floatingAura}
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-          className="pointer-events-none absolute left-8 top-10 h-24 w-24 rounded-full bg-primary/10 blur-2xl md:h-36 md:w-36"
+          className="absolute top-0 left-1/4 w-72 h-72 rounded-full bg-primary/20 blur-3xl"
+          style={{ y: yBg1 }}
         />
         <motion.div
-          aria-hidden="true"
-          animate={shouldReduceMotion ? {} : { y: [0, 16, 0], x: [0, -10, 0], opacity: [0.25, 0.55, 0.25] }}
-          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-          className="pointer-events-none absolute right-6 bottom-10 h-20 w-20 rounded-full bg-primary-accent/10 blur-2xl md:h-32 md:w-32"
+          className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-secondary/20 blur-3xl"
+          style={{ y: yBg2 }}
         />
+      </div>
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-20 flex flex-col lg:flex-row items-center justify-between gap-8">
         
         {/* Text Content */}
-        <motion.div
-          variants={fadeUp}
+        <motion.div 
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
           className="md:w-1/2 text-center md:text-left mb-10 md:mb-0"
         >
           {/* Use theme-aware colors: text-text */}
@@ -68,60 +63,56 @@ function Home() {
           </p>
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-3 sm:space-x-4">
-            <motion.a
+            <a
               href="#projects"
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.97 }}
               className="bg-primary text-white font-medium py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow-lg hover:bg-primary-accent transition duration-300 transform hover:scale-105 text-sm sm:text-base"
             >
               View My Work
-            </motion.a>
-            <motion.a
+            </a>
+            <a
               href="https://github.com/rajesh580"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.97 }}
               className="bg-surface text-text font-medium py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow-lg hover:bg-surface/70 transition duration-300 transform hover:scale-105 flex items-center justify-center text-sm sm:text-base"
             >
               <FaGithub className="mr-2" /> GitHub
-            </motion.a>
+            </a>
           </div>
 
           <div className="grid grid-cols-2 gap-3 mt-8">
-            <motion.div whileHover={{ y: -2 }} className="bg-surface border border-primary/20 p-4 rounded-xl shadow-sm">
+            <div className="bg-surface border border-primary/20 p-4 rounded-xl shadow-sm">
               <h4 className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">Experience</h4>
               <p className="text-2xl font-bold text-text">2+ yrs</p>
-            </motion.div>
-            <motion.div whileHover={{ y: -2 }} className="bg-surface border border-primary/20 p-4 rounded-xl shadow-sm">
+            </div>
+            <div className="bg-surface border border-primary/20 p-4 rounded-xl shadow-sm">
               <h4 className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">Projects</h4>
               <p className="text-2xl font-bold text-text">9</p>
-            </motion.div>
+            </div>
           </div>
         </motion.div>
 
         {/* Image */}
         <motion.div 
-          variants={fadeUp}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           className="md:w-1/3 flex justify-center"
         >
           <div className="relative">
             <motion.div
               aria-hidden="true"
-              animate={shouldReduceMotion ? {} : { scale: [1, 1.05, 1], rotate: [0, 4, 0] }}
-              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute inset-0 rounded-full border border-primary/20"
-            />
-            <motion.div
-              aria-hidden="true"
-              animate={floatingBadgeAnimation}
-              transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
               className="pointer-events-none absolute -top-6 -right-8 z-10 hidden h-24 w-24 items-center justify-center rounded-full border border-primary/30 bg-surface/80 shadow-glow-lg backdrop-blur-md sm:flex md:h-28 md:w-28"
+              animate={orbitAnimation}
+              transition={{
+                y: { duration: 8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
+                x: { duration: 6, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
+                rotate: { duration: 10, repeat: Infinity, ease: "linear", repeatType: "loop" },
+              }}
             >
               <motion.div
-                animate={shouldReduceMotion ? {} : { rotate: -360 }}
-                transition={{ duration: 11, repeat: Infinity, ease: 'linear' }}
                 className="absolute inset-3 rounded-full border border-dashed border-primary/50"
+                animate={shouldReduceMotion ? {} : { rotate: -360 }}
+                transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
               />
               <span className="relative font-display text-2xl font-extrabold text-primary md:text-3xl">
                 &lt;/&gt;
@@ -135,7 +126,7 @@ function Home() {
             )}
 
             <img
-              src={`${process.env.PUBLIC_URL}/images/profile.jpg`}
+              src={`https://raw.githubusercontent.com/rajesh580/my-portfolio/refs/heads/main/public/images/profile.jpg`}
               alt="Rajesh Rajoli"
               onLoad={() => setImgLoading(false)}
               onError={(e) => { setImgLoading(false); }}
@@ -145,7 +136,7 @@ function Home() {
           </div>
         </motion.div>
 
-      </motion.div>
+      </div>
     </section>
   );
 }

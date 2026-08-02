@@ -8,10 +8,12 @@ import About from './components/sections/About';
 import Skills from './components/sections/Skills';
 import Projects from './components/sections/Projects';
 import Certificates from './components/sections/Certificates';
+import ScrollBackground from './components/layout/ScrollBackground';
 
 function App() {
   return (
-    <div>
+    <div className="relative isolate">
+      <ScrollBackground />
       <Header />
       <main>
         <Home />

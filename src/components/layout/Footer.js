@@ -1,6 +1,8 @@
 import React from 'react';
 import { FaLinkedin, FaInstagram, FaEnvelope, FaGithub } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
+import { fadeUp, staggerContainer, viewportOnce } from '../../utils/animations';
 
 function Footer() {
   const { theme } = useTheme(); // Get theme
@@ -8,59 +10,77 @@ function Footer() {
   return (
     // Use theme-aware colors: bg-surface, text-text-muted
     <section id="contact" className="bg-gradient-to-t from-background via-surface to-blue-900/10 text-text-muted py-16 md:py-20 border-t border-surface">
-      <div className="container mx-auto text-center px-4 sm:px-6 lg:px-20">
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        className="container mx-auto text-center px-4 sm:px-6 lg:px-20"
+      >
         {/* Use theme-aware colors: text-text */}
-        <h2 className={`text-2xl sm:text-3xl font-display font-bold mb-6 sm:mb-8 text-text ${theme === 'neon' ? 'text-glow' : ''}`}>
+        <motion.h2 variants={fadeUp} className={`text-2xl sm:text-3xl font-display font-bold mb-6 sm:mb-8 text-text ${theme === 'neon' ? 'text-glow' : ''}`}>
           Contact Me
-        </h2>
-        <p className="text-base sm:text-lg mb-6 sm:mb-8 max-w-lg mx-auto px-2">
+        </motion.h2>
+        <motion.p variants={fadeUp} className="text-base sm:text-lg mb-6 sm:mb-8 max-w-lg mx-auto px-2">
           I'm always open to discussing new projects, creative ideas, or opportunities.
-        </p>
-        <div className="flex flex-wrap justify-center gap-6 sm:gap-8 mb-8 sm:mb-10 px-2">
+        </motion.p>
+        <motion.div variants={staggerContainer} className="flex flex-wrap justify-center gap-6 sm:gap-8 mb-8 sm:mb-10 px-2">
           {/* LinkedIn */}
-          <a
+          <motion.a
             href="https://www.linkedin.com/in/rajesh-rajoli"
             target="_blank"
             rel="noopener noreferrer"
+            variants={fadeUp}
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 0.94 }}
             // Use theme-aware colors: hover:text-primary
             className="hover:text-primary transition duration-300 transform hover:scale-125"
             aria-label="LinkedIn Profile"
           >
             <FaLinkedin className="text-3xl sm:text-4xl" />
-          </a>
+          </motion.a>
           {/* GitHub */}
-          <a
+          <motion.a
             href="https://github.com/rajesh580"
             target="_blank"
             rel="noopener noreferrer"
+            variants={fadeUp}
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 0.94 }}
             className="hover:text-primary transition duration-300 transform hover:scale-125"
             aria-label="GitHub Profile"
           >
             <FaGithub className="text-3xl sm:text-4xl" />
-          </a>
+          </motion.a>
           {/* Instagram */}
-          <a
+          <motion.a
             href="https://www.instagram.com/rajesh_raj__"
             target="_blank"
             rel="noopener noreferrer"
+            variants={fadeUp}
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 0.94 }}
             className="hover:text-primary transition duration-300 transform hover:scale-125"
             aria-label="Instagram Profile"
           >
             <FaInstagram className="text-3xl sm:text-4xl" />
-          </a>
+          </motion.a>
           {/* Email */}
-          <a
+          <motion.a
             href="mailto:rajeshrajoli722@gmail.com"
+            variants={fadeUp}
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 0.94 }}
             className="hover:text-primary transition duration-300 transform hover:scale-125"
             aria-label="Email Me"
           >
             <FaEnvelope className="text-3xl sm:text-4xl" />
-          </a>
-        </div>
-        <p className="text-xs sm:text-sm text-text-muted px-2">
+          </motion.a>
+        </motion.div>
+        <motion.p variants={fadeUp} className="text-xs sm:text-sm text-text-muted px-2">
           &copy; {new Date().getFullYear()} Rajesh Rajoli. All rights reserved.
-        </p>
-      </div>
+        </motion.p>
+      </motion.div>
     </section>
   );
 }

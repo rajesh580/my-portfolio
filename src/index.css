@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* 2. Define CSS Variables for ALL your themes */
 :root, .neon {
   /* Neon Theme */

@@ -13,6 +13,7 @@ import {
 } from 'react-icons/fa';
 import { SiMongodb, SiFlask, SiTailwindcss, SiCplusplus } from 'react-icons/si';
 import { useTheme } from '../../context/ThemeContext';
+import { fadeUp, scaleIn, staggerContainer, viewportOnce } from '../../utils/animations';
 
 // FIX: Define skills with react-icons components
 const skills = [
@@ -33,43 +34,51 @@ const skills = [
 function Skills() {
   const { theme } = useTheme(); // Get theme
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   return (
     // Use theme-aware colors: bg-background
     <section id="skills" className="py-16 md:py-28 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-20">
         {/* Use theme-aware colors: text-text */}
-        <h2 className={`text-3xl sm:text-4xl font-display font-bold text-center text-text mb-4 sm:mb-6 ${theme === 'neon' ? 'text-glow' : ''}`}>
-          My Skills
-        </h2>
-        <p className="text-center text-sm sm:text-base text-text-muted max-w-2xl mx-auto mb-8">
-          I work with a wide range of technologies, from frontend frameworks to backend services and cloud workflows.
-        </p>
-        <motion.div
+        <motion.h2
+          variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ staggerChildren: 0.1 }}
+          viewport={viewportOnce}
+          className={`text-3xl sm:text-4xl font-display font-bold text-center text-text mb-4 sm:mb-6 ${theme === 'neon' ? 'text-glow' : ''}`}
+        >
+          My Skills
+        </motion.h2>
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="text-center text-sm sm:text-base text-text-muted max-w-2xl mx-auto mb-8"
+        >
+          I work with a wide range of technologies, from frontend frameworks to backend services and cloud workflows.
+        </motion.p>
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 md:gap-8"
         >
           {skills.map((skill, index) => (
             <motion.div
               key={index}
-              variants={cardVariants}
+              variants={scaleIn}
               whileHover={{
-                scale: 1.1,
-                transition: { duration: 0.2 },
+                y: -3,
+                transition: { duration: 0.16 },
               }}
+              whileTap={{ scale: 0.98 }}
               // Use theme-aware colors: bg-surface
-              className="bg-surface rounded-lg shadow-lg p-4 sm:p-6 text-center hover:shadow-xl transition-all"
+              className="group bg-surface rounded-lg shadow-lg p-4 sm:p-6 text-center hover:shadow-xl transition-all"
             >
               {/* FIX: Render the icon as a component */}
               <skill.icon
-                className={`${skill.color} text-4xl sm:text-5xl md:text-6xl mx-auto`}
+                className={`${skill.color} text-4xl sm:text-5xl md:text-6xl mx-auto transition-transform duration-200 group-hover:-translate-y-1`}
                 aria-hidden="true"
               />
               {/* Use theme-aware colors: text-text */}
