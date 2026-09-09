@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "role": "Full Stack Developer",
+    "company": "Zetacoding Innovative Solutions",
+    "period": "Jul 2026 – Present",
+    "type": "Full-Time / Current",
+    "status": "Active",
+    "summary": "Building scalable full-stack web applications and integrating machine learning solutions with production REST APIs.",
+    "highlights": [
+      "Developed and deployed full-stack web applications using React.js, Node.js, Python, and Flask, implementing responsive interfaces and backend functionality.",
+      "Developed and integrated machine learning solutions and REST APIs into web applications to support data-driven features and application workflows."
+    ],
+    "tech": ["React.js", "Node.js", "Python", "Flask", "REST APIs", "Machine Learning"],
+    "metrics": [
+      { "label": "Status", "value": "Present" },
+      { "label": "Stack", "value": "React & Python" },
+      { "label": "Focus", "value": "Full-Stack & ML" }
+    ]
+  },
+  {
+    "id": 2,
+    "role": "Machine Learning & Generative AI Intern",
+    "company": "Contriver",
+    "period": "Feb 2026 – May 2026",
+    "type": "Internship",
+    "status": "Completed",
+    "summary": "Engineered predictive analytics models and generative AI workflows with extensive data preprocessing.",
+    "highlights": [
+      "Built 3 machine learning models using Python and Scikit-learn for predictive analytics and integrated them into REST API-based applications.",
+      "Performed data preprocessing and feature engineering on datasets containing 10,000+ records for model training and evaluation."
+    ],
+    "tech": ["Python", "Scikit-learn", "Generative AI", "Pandas", "Feature Engineering"],
+    "metrics": [
+      { "label": "Records", "value": "10,000+" },
+      { "label": "Models", "value": "3 Built" },
+      { "label": "Focus", "value": "AI & Analytics" }
+    ]
+  },
+  {
+    "id": 3,
+    "role": "Web Development Intern",
+    "company": "TSIAR Sports Team and Club",
+    "period": "Jun 2025 – Dec 2025",
+    "type": "Internship",
+    "status": "Completed",
+    "summary": "Streamlined club operations through custom automation tools and supported full-stack web application maintenance.",
+    "highlights": [
+      "Developed automation tools for event-management workflows, reducing manual processing by 30%.",
+      "Supported backend development, database management, and maintenance of 2 web applications."
+    ],
+    "tech": ["Web Development", "Database Management", "Automation", "Workflow Optimization"],
+    "metrics": [
+      { "label": "Efficiency", "value": "+30% Gain" },
+      { "label": "Web Apps", "value": "2 Maintained" },
+      { "label": "Focus", "value": "Backend & DB" }
+    ]
+  }
+]

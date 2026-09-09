@@ -2,34 +2,31 @@ import React from 'react';
 import { motion } from 'framer-motion';
 // FIX: Import icons from react-icons
 import {
-  FaHtml5,
-  FaCss3Alt,
   FaJsSquare,
   FaReact,
   FaNodeJs,
   FaGitAlt,
   FaPython,
-  FaJava
 } from 'react-icons/fa';
-import { SiMongodb, SiFlask, SiTailwindcss, SiCplusplus } from 'react-icons/si';
+import { SiMongodb, SiFlask, SiTailwindcss, SiMysql, SiFastapi, SiScikitlearn, SiExpress } from 'react-icons/si';
 import { useTheme } from '../../context/ThemeContext';
 import { fadeUp, scaleIn, staggerContainer, viewportOnce } from '../../utils/animations';
 import SectionMotionObjects from '../layout/SectionMotionObjects';
 
-// FIX: Define skills with react-icons components
+// FIX: Define skills with react-icons components matching resume
 const skills = [
-  { name: 'HTML', color: 'text-orange-500', icon: FaHtml5 },
-  { name: 'CSS', color: 'text-blue-500', icon: FaCss3Alt },
+  { name: 'React.js', color: 'text-blue-400', icon: FaReact },
   { name: 'JavaScript', color: 'text-yellow-500', icon: FaJsSquare },
-  { name: 'React', color: 'text-blue-400', icon: FaReact },
-  { name: 'Tailwind CSS', color: 'text-cyan-500', icon: SiTailwindcss },
   { name: 'Node.js', color: 'text-green-500', icon: FaNodeJs },
-  { name: 'Python', color: 'text-blue-600', icon: FaPython },
-  { name: 'Flask', color: 'text-gray-400', icon: SiFlask }, 
-  { name: 'C++', color: 'text-blue-700', icon: SiCplusplus },
-  {name: 'java', color: 'text-red-600', icon: FaJava },
-  { name: 'MongoDB', color: 'text-green-700', icon: SiMongodb },
-  { name: 'Git', color: 'text-red-500', icon: FaGitAlt },
+  { name: 'Express.js', color: 'text-gray-300', icon: SiExpress },
+  { name: 'Python', color: 'text-blue-500', icon: FaPython },
+  { name: 'FastAPI', color: 'text-teal-500', icon: SiFastapi },
+  { name: 'Flask', color: 'text-gray-400', icon: SiFlask },
+  { name: 'Scikit-learn / ML', color: 'text-orange-500', icon: SiScikitlearn },
+  { name: 'MySQL', color: 'text-blue-600', icon: SiMysql },
+  { name: 'MongoDB', color: 'text-green-600', icon: SiMongodb },
+  { name: 'Tailwind CSS', color: 'text-cyan-400', icon: SiTailwindcss },
+  { name: 'Git & GitHub', color: 'text-red-500', icon: FaGitAlt },
 ];
 
 function Skills() {

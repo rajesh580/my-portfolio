@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-// FIX: 'FaGithub' is now imported, 'FaLinkedin' is removed
-import { FaGithub } from 'react-icons/fa';
+// FIX: 'FaGithub' and 'FaDownload' imported
+import { FaGithub, FaDownload } from 'react-icons/fa';
+import projects from '../../data/projects.json';
 import { useTheme } from '../../context/ThemeContext';
 import { fadeUp, staggerContainer } from '../../utils/animations';
 
@@ -140,14 +141,25 @@ function Home() {
             Passionate about building innovative and efficient web applications. Welcome to my personal portfolio.
           </p>
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-3 sm:space-x-4">
+          <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-3 sm:gap-4 flex-wrap">
             <motion.a
               href="#projects"
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className="bg-primary text-white font-medium py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow-lg hover:bg-primary-accent transition duration-300 transform hover:scale-105 text-sm sm:text-base"
+              className="bg-primary text-white font-medium py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow-lg hover:bg-primary-accent transition duration-300 transform hover:scale-105 text-sm sm:text-base inline-flex items-center justify-center"
             >
               View My Work
+            </motion.a>
+            <motion.a
+              href={`${process.env.PUBLIC_URL}/resume/Raj_Resume.pdf`}
+              download="Rajesh_Rajoli_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-white font-medium py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 inline-flex items-center justify-center text-sm sm:text-base"
+            >
+              <FaDownload className="mr-2" /> Resume
             </motion.a>
             <motion.a
               href="https://github.com/rajesh580"
@@ -168,7 +180,7 @@ function Home() {
             </motion.div>
             <motion.div whileHover={{ y: -2 }} className="bg-surface border border-primary/20 p-4 rounded-xl shadow-sm">
               <h4 className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">Projects</h4>
-              <p className="text-2xl font-bold text-text">9</p>
+              <p className="text-2xl font-bold text-text">{projects.length}</p>
             </motion.div>
           </div>
         </motion.div>

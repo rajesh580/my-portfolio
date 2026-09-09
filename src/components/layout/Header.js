@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-// FIX: Added FaPalette
-import { FaBars, FaTimes, FaPalette } from 'react-icons/fa';
+// FIX: Added FaPalette and FaDownload
+import { FaBars, FaTimes, FaPalette, FaDownload } from 'react-icons/fa';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
 // FIX: Import the useTheme hook AND the themes array
 import { useTheme, themes } from '../../context/ThemeContext';
@@ -79,6 +79,8 @@ const ThemeSwitcher = () => {
 // --- END OF THEME SWITCHER COMPONENT ---
 
 
+
+
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -87,6 +89,7 @@ function Header() {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
+    { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
     { name: 'Certificates', href: '#certificates' },
     { name: 'Contact', href: '#contact' },
@@ -132,14 +135,16 @@ function Header() {
           </ul>
 
           <motion.a
-            href="https://drive.google.com/uc?export=download&id=1CNUXbAgFJP5FNTBN9lDZn1j_riAES4QG"
+            href={`${process.env.PUBLIC_URL}/resume/Raj_Resume.pdf`}
+            download="Rajesh_Rajoli_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className="ml-2 px-4 py-2 text-sm font-semibold rounded-lg text-white bg-primary hover:bg-primary-accent transition duration-200 shadow-md"
+            className="ml-2 px-4 py-2 text-sm font-semibold rounded-lg text-white bg-primary hover:bg-primary-accent transition duration-200 shadow-md inline-flex items-center gap-2"
           >
-            Download Resume
+            <FaDownload className="text-xs" />
+            <span>Download Resume</span>
           </motion.a>
 
           {/* FIX: Add the new ThemeSwitcher */}
@@ -187,6 +192,20 @@ function Header() {
                   </motion.a>
                 </motion.li>
               ))}
+              <li className="w-full px-6 pt-3">
+                <motion.a
+                  href={`${process.env.PUBLIC_URL}/resume/Raj_Resume.pdf`}
+                  download="Rajesh_Rajoli_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileTap={{ scale: 0.96 }}
+                  className="flex items-center justify-center gap-2 w-full py-2.5 px-4 text-sm font-semibold rounded-lg text-white bg-primary hover:bg-primary-accent transition duration-200 shadow-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <FaDownload className="text-xs" />
+                  <span>Download Resume</span>
+                </motion.a>
+              </li>
             </ul>
           </motion.div>
         )}

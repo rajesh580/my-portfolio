@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaCode, FaGraduationCap, FaLightbulb } from 'react-icons/fa';
+import { FaCode, FaGraduationCap, FaLightbulb, FaDownload } from 'react-icons/fa';
 import { useTheme } from '../../context/ThemeContext';
 import { fadeUp, scaleIn, staggerContainer, viewportOnce } from '../../utils/animations';
 import SectionMotionObjects from '../layout/SectionMotionObjects';
@@ -27,17 +27,29 @@ function About() {
             {/* Use theme-aware colors: text-text-muted, text-primary */}
             <p className="text-base sm:text-lg text-text-muted mb-4 sm:mb-6">
               Hi, I'm <strong className="text-primary">Rajesh Rajoli</strong>, a
-              software developer with a passion for building innovative and
-              efficient web applications. My expertise lies in full-stack
-              development, and I love solving real-world problems through
-              technology.
+              software engineer specializing in full-stack web development, REST APIs,
+              machine learning, and AI-powered applications. I build scalable, data-driven
+              solutions that solve real-world problems.
             </p>
-            <p className="text-base sm:text-lg text-text-muted mb-8 sm:mb-12">
-              With a strong commitment to continuous learning, I always look for
-              opportunities to improve my skills and take on challenging projects
-              that push me to grow. I thrive on collaboration and creating
-              impactful solutions.
+            <p className="text-base sm:text-lg text-text-muted mb-6 sm:mb-8">
+              With experience spanning production web platforms, predictive machine learning models,
+              and responsive modern interfaces, I focus on delivering clean code, reliable backend architectures,
+              and engaging user experiences.
             </p>
+
+            <motion.div variants={fadeUp} className="mb-8 flex justify-center">
+              <motion.a
+                href={`${process.env.PUBLIC_URL}/resume/Raj_Resume.pdf`}
+                download="Rajesh_Rajoli_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.96 }}
+                className="inline-flex items-center gap-2 bg-primary text-white font-semibold py-2.5 px-6 rounded-lg shadow-md hover:bg-primary-accent transition duration-200"
+              >
+                <FaDownload /> Download Resume
+              </motion.a>
+            </motion.div>
 
             <motion.div
               variants={scaleIn}
@@ -47,9 +59,9 @@ function About() {
               <h3 className="text-xl font-display font-bold text-text mb-3">Core Strengths</h3>
               <div className="space-y-3">
                 {[
-                  { name: 'React / Frontend', value: 90 },
-                  { name: 'Python / Backend', value: 85 },
-                  { name: 'Data Analysis', value: 80 },
+                  { name: 'React / Frontend Development', value: 90 },
+                  { name: 'Node.js / Python Backend & REST APIs', value: 88 },
+                  { name: 'Machine Learning & AI Solutions', value: 84 },
                 ].map((item) => (
                   <div key={item.name}>
                     <div className="flex justify-between text-sm text-text-muted mb-1">
