@@ -5,6 +5,7 @@ import { FaGithub, FaDownload } from 'react-icons/fa';
 import projects from '../../data/projects.json';
 import { useTheme } from '../../context/ThemeContext';
 import { fadeUp, staggerContainer } from '../../utils/animations';
+import { handleResumeDownload, RESUME_URL, RESUME_FILENAME } from '../../utils/downloadResume';
 
 function Home() {
   const { theme } = useTheme(); // Get current theme
@@ -151,13 +152,14 @@ function Home() {
               View My Work
             </motion.a>
             <motion.a
-              href={`${process.env.PUBLIC_URL}/resume/Raj_Resume.pdf`}
-              download="Rajesh_Rajoli_Resume.pdf"
+              href={RESUME_URL}
+              download={RESUME_FILENAME}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleResumeDownload}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className="border-2 border-primary text-primary hover:bg-primary hover:text-white font-medium py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 inline-flex items-center justify-center text-sm sm:text-base"
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-white font-medium py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 inline-flex items-center justify-center text-sm sm:text-base cursor-pointer"
             >
               <FaDownload className="mr-2" /> Resume
             </motion.a>

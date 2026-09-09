@@ -13,6 +13,9 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
+    "sync-resume": "node scripts/sync-resume.js",
+    "prestart": "node scripts/sync-resume.js",
+    "prebuild": "node scripts/sync-resume.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaCode, FaGraduationCap, FaLightbulb, FaDownload } from 'react-icons/fa';
 import { useTheme } from '../../context/ThemeContext';
 import { fadeUp, scaleIn, staggerContainer, viewportOnce } from '../../utils/animations';
+import { handleResumeDownload, RESUME_URL, RESUME_FILENAME } from '../../utils/downloadResume';
 import SectionMotionObjects from '../layout/SectionMotionObjects';
 
 function About() {
@@ -39,13 +40,14 @@ function About() {
 
             <motion.div variants={fadeUp} className="mb-8 flex justify-center">
               <motion.a
-                href={`${process.env.PUBLIC_URL}/resume/Raj_Resume.pdf`}
-                download="Rajesh_Rajoli_Resume.pdf"
+                href={RESUME_URL}
+                download={RESUME_FILENAME}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={handleResumeDownload}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.96 }}
-                className="inline-flex items-center gap-2 bg-primary text-white font-semibold py-2.5 px-6 rounded-lg shadow-md hover:bg-primary-accent transition duration-200"
+                className="inline-flex items-center gap-2 bg-primary text-white font-semibold py-2.5 px-6 rounded-lg shadow-md hover:bg-primary-accent transition duration-200 cursor-pointer"
               >
                 <FaDownload /> Download Resume
               </motion.a>

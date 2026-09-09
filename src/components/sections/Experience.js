@@ -16,6 +16,7 @@ import {
 import experienceData from '../../data/experience.json';
 import { useTheme } from '../../context/ThemeContext';
 import { fadeUp, scaleIn, viewportOnce } from '../../utils/animations';
+import { handleResumeDownload, RESUME_URL, RESUME_FILENAME } from '../../utils/downloadResume';
 import SectionMotionObjects from '../layout/SectionMotionObjects';
 
 const ICONS = {
@@ -646,11 +647,14 @@ function Experience() {
             {/* Quick Action Button for Resume */}
             <div className="mt-5 flex items-center gap-4">
               <motion.a
-                href={`${process.env.PUBLIC_URL}/resume/Raj_Resume.pdf`}
-                download="Rajesh_Rajoli_Resume.pdf"
+                href={RESUME_URL}
+                download={RESUME_FILENAME}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleResumeDownload}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-white text-xs font-bold shadow-glow hover:bg-primary-hover transition-all"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-white text-xs font-bold shadow-glow hover:bg-primary-hover transition-all cursor-pointer"
               >
                 <FaDownload className="text-xs" /> Download Full Resume
               </motion.a>
@@ -707,9 +711,12 @@ function Experience() {
             {/* Mobile Resume Action */}
             <div className="pt-2">
               <a
-                href={`${process.env.PUBLIC_URL}/resume/Raj_Resume.pdf`}
-                download="Rajesh_Rajoli_Resume.pdf"
-                className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-2xl bg-primary text-white text-xs font-bold shadow-glow"
+                href={RESUME_URL}
+                download={RESUME_FILENAME}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleResumeDownload}
+                className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-2xl bg-primary text-white text-xs font-bold shadow-glow cursor-pointer"
               >
                 <FaDownload className="text-xs" /> Download Resume (PDF)
               </a>

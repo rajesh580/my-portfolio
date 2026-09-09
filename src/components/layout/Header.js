@@ -4,6 +4,7 @@ import { FaBars, FaTimes, FaPalette, FaDownload } from 'react-icons/fa';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
 // FIX: Import the useTheme hook AND the themes array
 import { useTheme, themes } from '../../context/ThemeContext';
+import { handleResumeDownload, RESUME_URL, RESUME_FILENAME } from '../../utils/downloadResume';
 
 // --- NEW THEME SWITCHER COMPONENT ---
 const ThemeSwitcher = () => {
@@ -135,13 +136,14 @@ function Header() {
           </ul>
 
           <motion.a
-            href={`${process.env.PUBLIC_URL}/resume/Raj_Resume.pdf`}
-            download="Rajesh_Rajoli_Resume.pdf"
+            href={RESUME_URL}
+            download={RESUME_FILENAME}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={handleResumeDownload}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className="ml-2 px-4 py-2 text-sm font-semibold rounded-lg text-white bg-primary hover:bg-primary-accent transition duration-200 shadow-md inline-flex items-center gap-2"
+            className="ml-2 px-4 py-2 text-sm font-semibold rounded-lg text-white bg-primary hover:bg-primary-accent transition duration-200 shadow-md inline-flex items-center gap-2 cursor-pointer"
           >
             <FaDownload className="text-xs" />
             <span>Download Resume</span>
@@ -194,13 +196,16 @@ function Header() {
               ))}
               <li className="w-full px-6 pt-3">
                 <motion.a
-                  href={`${process.env.PUBLIC_URL}/resume/Raj_Resume.pdf`}
-                  download="Rajesh_Rajoli_Resume.pdf"
+                  href={RESUME_URL}
+                  download={RESUME_FILENAME}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileTap={{ scale: 0.96 }}
-                  className="flex items-center justify-center gap-2 w-full py-2.5 px-4 text-sm font-semibold rounded-lg text-white bg-primary hover:bg-primary-accent transition duration-200 shadow-md"
-                  onClick={() => setIsOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full py-2.5 px-4 text-sm font-semibold rounded-lg text-white bg-primary hover:bg-primary-accent transition duration-200 shadow-md cursor-pointer"
+                  onClick={(e) => {
+                    handleResumeDownload(e);
+                    setIsOpen(false);
+                  }}
                 >
                   <FaDownload className="text-xs" />
                   <span>Download Resume</span>
