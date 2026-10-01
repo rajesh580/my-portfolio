@@ -4,22 +4,26 @@ const path = require('path');
 const projectRoot = path.resolve(__dirname, '..');
 const resumeSrcDir = path.join(projectRoot, 'resume');
 
-// Check source resume directory
-if (!fs.existsSync(resumeSrcDir)) {
-  console.warn('[sync-resume] resume directory not found at:', resumeSrcDir);
+// Check source PDF in root or resume directory
+let sourcePdfPath = null;
+const rootFiles = fs.readdirSync(projectRoot);
+const rootPdf = rootFiles.find(f => f.toLowerCase().endsWith('.pdf'));
+
+if (rootPdf) {
+  sourcePdfPath = path.join(projectRoot, rootPdf);
+} else if (fs.existsSync(resumeSrcDir)) {
+  const files = fs.readdirSync(resumeSrcDir);
+  const pdfFile = files.find(f => f.toLowerCase().endsWith('.pdf'));
+  if (pdfFile) {
+    sourcePdfPath = path.join(resumeSrcDir, pdfFile);
+  }
+}
+
+if (!sourcePdfPath) {
+  console.warn('[sync-resume] No PDF found in root or resume directory.');
   process.exit(0);
 }
 
-// Find any PDF in resume/
-const files = fs.readdirSync(resumeSrcDir);
-const pdfFile = files.find(f => f.toLowerCase().endsWith('.pdf'));
-
-if (!pdfFile) {
-  console.warn('[sync-resume] No PDF found in resume directory.');
-  process.exit(0);
-}
-
-const sourcePdfPath = path.join(resumeSrcDir, pdfFile);
 console.log(`[sync-resume] Found resume: ${sourcePdfPath}`);
 
 // Target directories
