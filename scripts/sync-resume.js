@@ -4,20 +4,27 @@ const path = require('path');
 const projectRoot = path.resolve(__dirname, '..');
 const resumeSrcDir = path.join(projectRoot, 'resume');
 
-// Check source PDF in root or resume directory
-let sourcePdfPath = null;
-const rootFiles = fs.readdirSync(projectRoot);
-const rootPdf = rootFiles.find(f => f.toLowerCase().endsWith('.pdf'));
+// Check source PDF in resume/ or project root (pick the newest by modified time)
+let candidates = [];
 
-if (rootPdf) {
-  sourcePdfPath = path.join(projectRoot, rootPdf);
-} else if (fs.existsSync(resumeSrcDir)) {
-  const files = fs.readdirSync(resumeSrcDir);
-  const pdfFile = files.find(f => f.toLowerCase().endsWith('.pdf'));
-  if (pdfFile) {
-    sourcePdfPath = path.join(resumeSrcDir, pdfFile);
+if (fs.existsSync(resumeSrcDir)) {
+  const resumeFiles = fs.readdirSync(resumeSrcDir);
+  const pdf = resumeFiles.find(f => f.toLowerCase().endsWith('.pdf'));
+  if (pdf) {
+    const fullPath = path.join(resumeSrcDir, pdf);
+    candidates.push({ path: fullPath, mtime: fs.statSync(fullPath).mtimeMs });
   }
 }
+
+const rootFiles = fs.readdirSync(projectRoot);
+const rootPdf = rootFiles.find(f => f.toLowerCase().endsWith('.pdf'));
+if (rootPdf) {
+  const fullPath = path.join(projectRoot, rootPdf);
+  candidates.push({ path: fullPath, mtime: fs.statSync(fullPath).mtimeMs });
+}
+
+candidates.sort((a, b) => b.mtime - a.mtime);
+const sourcePdfPath = candidates.length > 0 ? candidates[0].path : null;
 
 if (!sourcePdfPath) {
   console.warn('[sync-resume] No PDF found in root or resume directory.');
