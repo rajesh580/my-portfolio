@@ -135,7 +135,7 @@ function Home() {
           </h1>
           {/* Use theme-aware colors: text-primary */}
           <p className="text-xl sm:text-2xl font-display font-semibold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent mb-6">
-            Software Developer
+            Full Stack Developer
           </p>
           {/* Use theme-aware colors: text-text-muted */}
           <p className="text-base sm:text-lg text-text-muted mb-8 max-w-md mx-auto md:mx-0">

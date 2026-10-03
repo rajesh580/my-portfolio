@@ -53,7 +53,7 @@ function About() {
             {/* Use theme-aware colors: text-text-muted, text-primary */}
             <p className="text-base sm:text-lg text-text-muted mb-4 sm:mb-6">
               Hi, I'm <strong className="text-primary">Rajesh Rajoli</strong>, a
-              software developer with a passion for building innovative and
+              full stack developer with a passion for building innovative and
               efficient web applications. My expertise lies in full-stack
               development, and I love solving real-world problems through
               technology.
